@@ -1,0 +1,162 @@
+// ─── EcoSwap Prisma Schema ───────────────────────────────────────────────
+// MySQL 8.4 · Next.js 16 · App Router
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// ─── Users ────────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique @db.VarChar(255)
+  name         String   @db.VarChar(128)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  role         Role     @default(MEMBER)
+  avatarUrl    String?  @map("avatar_url") @db.VarChar(512)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  appraisals       Appraisal[]
+  barterProposals  BarterProposal[]
+  barterMessages   BarterMessage[]
+
+  @@map("users")
+}
+
+enum Role {
+  SUPER_ADMIN
+  CURATOR
+  MEMBER
+
+  @@map("user_role")
+}
+
+// ─── Heritage Catalog ─────────────────────────────────────────────────────
+
+model HeritageItem {
+  id          String         @id @default(cuid())
+  name        String         @db.VarChar(255)
+  region      String         @db.VarChar(128)
+  category    String         @db.VarChar(64)
+  description String?        @db.Text
+  imageUrl    String?        @map("image_url") @db.VarChar(512)
+  era         String?        @db.VarChar(128)
+  status      HeritageStatus @default(ACTIVE)
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+
+  @@map("heritage_items")
+}
+
+enum HeritageStatus {
+  ACTIVE
+  REVIEW
+  INACTIVE
+
+  @@map("heritage_status")
+}
+
+// ─── Appraisal Results ────────────────────────────────────────────────────
+
+model Appraisal {
+  id                 String    @id @default(cuid())
+  userId             String?   @map("user_id")
+  imageName          String    @map("image_name") @db.VarChar(512)
+  imagePath          String?   @map("image_path") @db.VarChar(512)
+  imageSize          Int       @map("image_size")
+  detectedObject     String    @map("detected_object") @db.VarChar(255)
+  confidenceScore    Decimal   @map("confidence_score") @db.Decimal(5, 2)
+  roleClassification String    @map("role_classification") @db.VarChar(128)
+  conditionAnalysis  String    @map("condition_analysis") @db.VarChar(128)
+  ecoSwapPoints      Int       @map("eco_swap_points")
+  inferenceMs        Int       @map("inference_ms")
+  modelVersion       String    @map("model_version") @default("EcoSwap-Heritage-CNN v1.2") @db.VarChar(64)
+  openForBarter      Boolean   @default(false) @map("open_for_barter")
+  ownerName          String?   @map("owner_name") @db.VarChar(128)
+  ownerCity          String?   @map("owner_city") @db.VarChar(128)
+  swapDescription    String?   @map("swap_description") @db.Text
+  wantedItem         String?   @map("wanted_item") @db.VarChar(255)
+  publishedAt        DateTime? @map("published_at")
+  createdAt          DateTime  @default(now()) @map("created_at")
+
+  user                 User?                 @relation(fields: [userId], references: [id], onDelete: SetNull)
+  predictions          AppraisalPrediction[]
+  offeredInProposals   BarterProposal[]      @relation("OfferedAppraisal")
+  requestedInProposals BarterProposal[]      @relation("RequestedAppraisal")
+
+  @@index([userId])
+  @@index([createdAt])
+  @@index([openForBarter, createdAt])
+  @@index([openForBarter, publishedAt])
+  @@map("appraisals")
+}
+
+model AppraisalPrediction {
+  id          String @id @default(cuid())
+  appraisalId String @map("appraisal_id")
+  label       String @db.VarChar(255)
+  probability Decimal  @db.Decimal(5, 2)
+  rank        Int
+
+  appraisal Appraisal @relation(fields: [appraisalId], references: [id], onDelete: Cascade)
+
+  @@index([appraisalId])
+  @@map("appraisal_predictions")
+}
+
+// ─── Barter Proposals (tukar barang antar pengguna) ───────────────────────
+
+enum BarterProposalStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+  COMPLETED
+
+  @@map("barter_proposal_status")
+}
+
+model BarterProposal {
+  id                   String               @id @default(cuid())
+  proposerUserId       String               @map("proposer_user_id")
+  offeredAppraisalId   String               @map("offered_appraisal_id")
+  requestedAppraisalId String               @map("requested_appraisal_id")
+  message              String?              @db.Text
+  status               BarterProposalStatus @default(PENDING)
+  respondedAt          DateTime?            @map("responded_at")
+  completedAt          DateTime?            @map("completed_at")
+  createdAt            DateTime             @default(now()) @map("created_at")
+  updatedAt            DateTime             @updatedAt @map("updated_at")
+
+  proposer           User              @relation(fields: [proposerUserId], references: [id], onDelete: Cascade)
+  offeredAppraisal   Appraisal         @relation("OfferedAppraisal", fields: [offeredAppraisalId], references: [id], onDelete: Cascade)
+  requestedAppraisal Appraisal         @relation("RequestedAppraisal", fields: [requestedAppraisalId], references: [id], onDelete: Cascade)
+  messages           BarterMessage[]
+
+  @@index([status, createdAt])
+  @@index([proposerUserId])
+  @@index([requestedAppraisalId])
+  @@index([offeredAppraisalId])
+  @@map("barter_proposals")
+}
+
+// ─── Barter Messages (percakapan antar pengguna dalam satu proposal) ─────
+
+model BarterMessage {
+  id         String   @id @default(cuid())
+  proposalId String   @map("proposal_id")
+  senderId   String   @map("sender_id")
+  message    String   @db.Text
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  proposal BarterProposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  sender   User           @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([proposalId, createdAt])
+  @@map("barter_messages")
+}
