@@ -1153,5 +1153,26 @@
     "label": "Tekstil",
     "probability": 5,
     "rank": 3
+  },
+  {
+    "id": "dbmpx941xq0002",
+    "appraisalId": "dbmpx941xq0001",
+    "label": "Batik Tulis",
+    "probability": 93.2,
+    "rank": 1
+  },
+  {
+    "id": "dbmpx941xq0003",
+    "appraisalId": "dbmpx941xq0001",
+    "label": "Tenun Ikat",
+    "probability": 4.5,
+    "rank": 2
+  },
+  {
+    "id": "dbmpx941xq0004",
+    "appraisalId": "dbmpx941xq0001",
+    "label": "Songket",
+    "probability": 2.3,
+    "rank": 3
   }
 ]
