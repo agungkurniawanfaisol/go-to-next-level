@@ -4,17 +4,6 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-/**
- * Must match the directory used in lib/uploads.ts.
- * On Vercel serverless, uploaded files go to /tmp/.
- */
-function getUploadDir(): string {
-  if (process.env.VERCEL) {
-    return path.join("/tmp", "uploads", "appraisals");
-  }
-  return path.join(process.cwd(), "public", "uploads", "appraisals");
-}
-
 const MIME: Record<string, string> = {
   png: "image/png",
   jpg: "image/jpeg",
@@ -25,6 +14,11 @@ const MIME: Record<string, string> = {
 
 type RouteParams = { params: Promise<{ filename: string }> };
 
+/**
+ * Serves seed data images from disk (deployed as static assets via git).
+ * User-uploaded images from appraisal are stored in Vercel Blob and use
+ * their full blob URL directly as src — they never reach this handler.
+ */
 export async function GET(_request: Request, { params }: RouteParams) {
   const { filename } = await params;
 
@@ -39,7 +33,9 @@ export async function GET(_request: Request, { params }: RouteParams) {
   }
 
   try {
-    const buffer = await readFile(path.join(getUploadDir(), filename));
+    const buffer = await readFile(
+      path.join(process.cwd(), "public", "uploads", "appraisals", filename),
+    );
     return new NextResponse(buffer, {
       headers: {
         "Content-Type": mime,

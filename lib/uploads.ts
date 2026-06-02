@@ -1,21 +1,6 @@
+import { put } from "@vercel/blob";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
-
-/**
- * On Vercel serverless, only /tmp/ is writable.
- * The upload route reads from the same location.
- */
-function getUploadDir(): string {
-  // Vercel sets VERCEL=1 env
-  if (process.env.VERCEL) {
-    return path.join("/tmp", "uploads", "appraisals");
-  }
-  return path.join(process.cwd(), "public", "uploads", "appraisals");
-}
-
-function getPublicPath(filename: string): string {
-  return `/uploads/appraisals/${filename}`;
-}
 
 function extensionFromMime(mime: string): string {
   const map: Record<string, string> = {
@@ -27,19 +12,36 @@ function extensionFromMime(mime: string): string {
   return map[mime] ?? "jpg";
 }
 
+/**
+ * Save an appraisal image.
+ * On Vercel: uploads to Vercel Blob Storage, returns the full blob URL.
+ * Local: writes to public/uploads/appraisals/, returns a relative path.
+ *
+ * Components across the app use imagePath as <img src={imagePath}>,
+ * which works with both full URLs (blob) and relative paths (seed data).
+ */
 export async function saveAppraisalImage(
   id: string,
   file: File,
 ): Promise<string> {
-  const uploadDir = getUploadDir();
-  await mkdir(uploadDir, { recursive: true });
-
   const ext = extensionFromMime(file.type);
   const filename = `${id}.${ext}`;
-  const diskPath = path.join(uploadDir, filename);
   const buffer = Buffer.from(await file.arrayBuffer());
 
-  await writeFile(diskPath, buffer);
+  if (process.env.VERCEL) {
+    // Upload to Vercel Blob Storage — returns a public URL
+    const blob = await put(`uploads/appraisals/${filename}`, buffer, {
+      access: "public",
+      contentType: file.type,
+      addRandomSuffix: false,
+    });
+    return blob.url;
+  }
 
-  return getPublicPath(filename);
+  // Local: write to disk
+  const uploadDir = path.join(process.cwd(), "public", "uploads", "appraisals");
+  await mkdir(uploadDir, { recursive: true });
+  await writeFile(path.join(uploadDir, filename), buffer);
+
+  return `/uploads/appraisals/${filename}`;
 }
