@@ -61,6 +61,62 @@ export async function publishBarter(
   }
 }
 
+export type UpdateBarterInput = {
+  appraisalId: string;
+  ownerName: string;
+  ownerCity: string;
+  swapDescription?: string;
+  wantedItem?: string;
+  imagePath?: string;
+};
+
+export async function updateBarter(
+  input: UpdateBarterInput,
+): Promise<ActionResult> {
+  const { appraisalId, ownerName, ownerCity, swapDescription, wantedItem, imagePath } =
+    input;
+
+  if (!ownerName.trim() || !ownerCity.trim()) {
+    return { success: false, error: "Nama dan kota wajib diisi." };
+  }
+
+  try {
+    const existing = db.appraisal.findUnique({
+      where: { id: appraisalId },
+    });
+
+    if (!existing) {
+      return { success: false, error: "Appraisal tidak ditemukan." };
+    }
+
+    const data: Record<string, any> = {
+      ownerName: ownerName.trim(),
+      ownerCity: ownerCity.trim(),
+      swapDescription: swapDescription?.trim() || null,
+      wantedItem: wantedItem?.trim() || null,
+    };
+
+    if (imagePath) {
+      data.imagePath = imagePath;
+    }
+
+    db.appraisal.update({
+      where: { id: appraisalId },
+      data,
+    });
+
+    revalidatePath("/barter");
+    revalidatePath(`/barter/${appraisalId}`);
+    revalidatePath("/admin/barter");
+    revalidatePath("/barter/saya");
+
+    return { success: true };
+  } catch (error) {
+    console.error("[updateBarter]", error);
+    return { success: false, error: "Gagal memperbarui listing." };
+  }
+}
+
 export async function unpublishBarter(appraisalId: string): Promise<ActionResult> {
   try {
     db.appraisal.update({
