@@ -4,7 +4,16 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads", "appraisals");
+/**
+ * Must match the directory used in lib/uploads.ts.
+ * On Vercel serverless, uploaded files go to /tmp/.
+ */
+function getUploadDir(): string {
+  if (process.env.VERCEL) {
+    return path.join("/tmp", "uploads", "appraisals");
+  }
+  return path.join(process.cwd(), "public", "uploads", "appraisals");
+}
 
 const MIME: Record<string, string> = {
   png: "image/png",
@@ -30,7 +39,7 @@ export async function GET(_request: Request, { params }: RouteParams) {
   }
 
   try {
-    const buffer = await readFile(path.join(UPLOAD_DIR, filename));
+    const buffer = await readFile(path.join(getUploadDir(), filename));
     return new NextResponse(buffer, {
       headers: {
         "Content-Type": mime,
