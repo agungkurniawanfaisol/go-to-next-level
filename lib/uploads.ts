@@ -14,11 +14,12 @@ function extensionFromMime(mime: string): string {
 
 /**
  * Save an appraisal image.
- * On Vercel: uploads to Vercel Blob Storage, returns the full blob URL.
- * Local: writes to public/uploads/appraisals/, returns a relative path.
+ * On Vercel:
+ *   - Tries Vercel Blob Storage first (requires BLOB_READ_WRITE_TOKEN).
+ *   - Falls back to /tmp/ if Blob fails (e.g. missing token, transient error).
+ * Local: writes to public/uploads/appraisals/.
  *
- * Components across the app use imagePath as <img src={imagePath}>,
- * which works with both full URLs (blob) and relative paths (seed data).
+ * Returns the path/URL that can be used as <img src={imagePath}>.
  */
 export async function saveAppraisalImage(
   id: string,
@@ -29,13 +30,23 @@ export async function saveAppraisalImage(
   const buffer = Buffer.from(await file.arrayBuffer());
 
   if (process.env.VERCEL) {
-    // Upload to Vercel Blob Storage — returns a public URL
-    const blob = await put(`uploads/appraisals/${filename}`, buffer, {
-      access: "public",
-      contentType: file.type,
-      addRandomSuffix: false,
-    });
-    return blob.url;
+    // Try Blob Storage first
+    try {
+      const blob = await put(`uploads/appraisals/${filename}`, buffer, {
+        access: "public",
+        contentType: file.type,
+        addRandomSuffix: false,
+      });
+      return blob.url;
+    } catch (err) {
+      console.warn("[uploads] Blob upload failed, falling back to /tmp/:", err);
+    }
+
+    // Fallback: write to /tmp/ (ephemeral but works without Blob token)
+    const tmpDir = "/tmp/uploads/appraisals";
+    await mkdir(tmpDir, { recursive: true });
+    await writeFile(path.join(tmpDir, filename), buffer);
+    return `/uploads/appraisals/${filename}`;
   }
 
   // Local: write to disk
