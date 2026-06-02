@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { unpublishBarter } from "@/lib/actions/barter";
+import { EditBarterForm } from "@/components/barter/EditBarterForm";
 import type { BarterListing } from "@/lib/api/barter";
 
 type AdminBarterCardProps = {
@@ -24,6 +25,7 @@ function isHighHeritage(role: string): boolean {
 
 export function AdminBarterCard({ listing }: AdminBarterCardProps) {
   const [isPending, startTransition] = useTransition();
+  const [showEdit, setShowEdit] = useState(false);
 
   const imageSrc =
     listing.imagePath ??
@@ -137,6 +139,13 @@ export function AdminBarterCard({ listing }: AdminBarterCardProps) {
             </Link>
             <button
               type="button"
+              onClick={() => setShowEdit(true)}
+              className="rounded-full border border-gold/30 px-4 py-2 text-xs font-medium text-gold-dark transition-colors hover:bg-gold/8"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
               onClick={handleUnpublish}
               disabled={isPending}
               className="rounded-full border border-red-200 px-4 py-2 text-xs font-medium text-red-700 transition-colors hover:bg-red-50 disabled:opacity-60"
@@ -146,6 +155,13 @@ export function AdminBarterCard({ listing }: AdminBarterCardProps) {
           </div>
         </div>
       </div>
+
+      {showEdit && (
+        <EditBarterForm
+          listing={listing}
+          onClose={() => setShowEdit(false)}
+        />
+      )}
     </article>
   );
 }

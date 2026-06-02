@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
-import { getValidSessionUserId } from "@/lib/auth";
+import { getSession, getValidSessionUserId } from "@/lib/auth";
 
 export type PublishBarterInput = {
   appraisalId: string;
@@ -73,6 +73,14 @@ export type UpdateBarterInput = {
 export async function updateBarter(
   input: UpdateBarterInput,
 ): Promise<ActionResult> {
+  // Hanya admin (SUPER_ADMIN / CURATOR) yang boleh edit
+  const session = await getSession();
+  const isAdmin =
+    session?.role === "SUPER_ADMIN" || session?.role === "CURATOR";
+  if (!isAdmin) {
+    return { success: false, error: "Hanya admin yang dapat mengedit listing." };
+  }
+
   const { appraisalId, ownerName, ownerCity, swapDescription, wantedItem, imagePath } =
     input;
 

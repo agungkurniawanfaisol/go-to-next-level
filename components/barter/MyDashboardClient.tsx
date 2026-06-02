@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { EditBarterForm } from "@/components/barter/EditBarterForm";
 import { BarterProposalCard } from "@/components/barter/BarterProposalCard";
 import { formatDateShortId } from "@/lib/format-date-id";
 
@@ -23,7 +21,6 @@ export function MyDashboardClient({
   data: DashboardData;
   userId: string;
 }) {
-  const [editingId, setEditingId] = useState<string | null>(null);
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-12">
@@ -133,23 +130,9 @@ export function MyDashboardClient({
                             {formatDateShortId(item.publishedAt)}
                           </span>
                         )}
-                        <button
-                          type="button"
-                          onClick={() => setEditingId(item.id)}
-                          className="rounded-full border border-ink/12 px-3 py-0.5 text-[10px] font-medium text-ink/55 transition-colors hover:border-forest/40 hover:text-forest"
-                        >
-                          Edit
-                        </button>
                       </div>
                     </div>
                   </div>
-
-                  {editingId === item.id && (
-                    <EditBarterForm
-                      listing={item}
-                      onClose={() => setEditingId(null)}
-                    />
-                  )}
                 </div>
               );
             })}
