@@ -40,7 +40,7 @@ export function HeritageDetailClient({ item }: { item: HeritageDetail }) {
 
   return (
     <>
-      <div className="p-6 lg:p-8 dark:text-[#f0ebe3]">
+      <div className="p-6 lg:p-8 dark:bg-[#0f0e0c] dark:text-[#f0ebe3]">
         {/* Breadcrumb + actions */}
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <nav className="flex items-center gap-2 text-sm text-ink/50">
@@ -70,7 +70,7 @@ export function HeritageDetailClient({ item }: { item: HeritageDetail }) {
             <button
               type="button"
               onClick={() => setDeleting(true)}
-              className="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:bg-red-100"
+              className="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:bg-red-100 dark:border-red-800/30 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -85,7 +85,7 @@ export function HeritageDetailClient({ item }: { item: HeritageDetail }) {
           {/* Image / Visual */}
           <div className="lg:col-span-1">
             {hasImage ? (
-              <div className="overflow-hidden rounded-2xl border border-ink/8 shadow-card">
+              <div className="overflow-hidden rounded-2xl border border-ink/8 shadow-card dark:bg-[#1a1714]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={item.imageUrl!}
@@ -94,7 +94,7 @@ export function HeritageDetailClient({ item }: { item: HeritageDetail }) {
                 />
               </div>
             ) : (
-              <div className="flex h-80 items-center justify-center rounded-2xl border border-dashed border-ink/15 bg-ink/3 lg:h-96">
+              <div className="flex h-80 items-center justify-center rounded-2xl border border-dashed border-ink/15 bg-ink/3 lg:h-96 dark:bg-[#1a1714]">
                 <div className="text-center">
                   <svg className="mx-auto h-12 w-12 text-ink/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
