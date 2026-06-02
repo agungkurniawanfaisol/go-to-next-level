@@ -1,8 +1,12 @@
 /** Zona waktu tetap agar SSR (Docker UTC) dan browser tidak hydration mismatch */
 const TIMEZONE = "Asia/Jakarta";
 
-export function formatDateId(d: Date): string {
-  return d.toLocaleDateString("id-ID", {
+function toDate(d: Date | string): Date {
+  return typeof d === "string" ? new Date(d) : d;
+}
+
+export function formatDateId(d: Date | string): string {
+  return toDate(d).toLocaleDateString("id-ID", {
     timeZone: TIMEZONE,
     day: "numeric",
     month: "long",
@@ -10,8 +14,8 @@ export function formatDateId(d: Date): string {
   });
 }
 
-export function formatDateShortId(d: Date): string {
-  return d.toLocaleDateString("id-ID", {
+export function formatDateShortId(d: Date | string): string {
+  return toDate(d).toLocaleDateString("id-ID", {
     timeZone: TIMEZONE,
     day: "numeric",
     month: "short",
@@ -19,8 +23,8 @@ export function formatDateShortId(d: Date): string {
   });
 }
 
-export function formatDateTimeId(d: Date): string {
-  return d.toLocaleString("id-ID", {
+export function formatDateTimeId(d: Date | string): string {
+  return toDate(d).toLocaleString("id-ID", {
     timeZone: TIMEZONE,
     day: "numeric",
     month: "short",

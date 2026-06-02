@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import { getValidSessionUserId } from "@/lib/auth";
 
 export type PublishBarterInput = {
@@ -27,7 +27,7 @@ export async function publishBarter(
   }
 
   try {
-    const existing = await prisma.appraisal.findUnique({
+    const existing = db.appraisal.findUnique({
       where: { id: appraisalId },
     });
 
@@ -37,7 +37,7 @@ export async function publishBarter(
 
     const userId = await getValidSessionUserId();
 
-    await prisma.appraisal.update({
+    db.appraisal.update({
       where: { id: appraisalId },
       data: {
         openForBarter: true,
@@ -46,7 +46,7 @@ export async function publishBarter(
         ownerCity: ownerCity.trim(),
         swapDescription: swapDescription?.trim() || null,
         wantedItem: wantedItem?.trim() || null,
-        publishedAt: new Date(),
+        publishedAt: new Date().toISOString(),
       },
     });
 
@@ -63,7 +63,7 @@ export async function publishBarter(
 
 export async function unpublishBarter(appraisalId: string): Promise<ActionResult> {
   try {
-    await prisma.appraisal.update({
+    db.appraisal.update({
       where: { id: appraisalId },
       data: {
         openForBarter: false,

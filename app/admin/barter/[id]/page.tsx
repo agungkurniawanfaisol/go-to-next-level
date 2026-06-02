@@ -32,9 +32,10 @@ const STATUS_BADGE: Record<
   },
 };
 
-function formatDate(d: Date | null): string {
+function formatDate(d: Date | string | null): string {
   if (!d) return "—";
-  return d.toLocaleDateString("id-ID", {
+  const date = typeof d === "string" ? new Date(d) : d;
+  return date.toLocaleDateString("id-ID", {
     day: "numeric",
     month: "long",
     year: "numeric",

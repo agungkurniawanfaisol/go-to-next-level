@@ -2,11 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   transpilePackages: ["react-pannellum"],
-  serverExternalPackages: [
-    "@prisma/client",
-    "@prisma/adapter-mariadb",
-    "mariadb",
-  ],
+  serverExternalPackages: [],
   images: {
     remotePatterns: [
       {

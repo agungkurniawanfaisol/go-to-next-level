@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import { cookies } from "next/headers";
 import { connection } from "next/server";
 import { SignJWT, jwtVerify } from "jose";
@@ -84,20 +84,20 @@ export async function loginUser(
     return { success: false, error: "Email dan password wajib diisi." };
   }
 
-  const user = await prisma.user.findUnique({ where: { email } });
+  const user = db.user.findUnique({ where: { email } });
   if (!user) {
     return { success: false, error: "Email atau password salah." };
   }
 
-  if (!verifyPassword(password, user.passwordHash)) {
+  if (!verifyPassword(password, String(user.passwordHash))) {
     return { success: false, error: "Email atau password salah." };
   }
 
   const session: SessionPayload = {
     userId: user.id,
-    email: user.email,
-    name: user.name,
-    role: user.role,
+    email: user.email as string,
+    name: user.name as string,
+    role: user.role as string,
   };
 
   const token = await createToken(session);
@@ -125,17 +125,16 @@ export async function getSession(): Promise<SessionPayload | null> {
   return verifyToken(token);
 }
 
-/** userId dari session yang masih ada di DB (hindari FK error setelah re-seed) */
+/** userId dari session yang masih ada di DB (hindari error setelah re-seed) */
 export async function getValidSessionUserId(): Promise<string | null> {
   const session = await getSession();
   if (!session?.userId) return null;
 
-  const user = await prisma.user.findUnique({
+  const user = db.user.findUnique({
     where: { id: session.userId },
-    select: { id: true },
   });
 
-  return user?.id ?? null;
+  return (user?.id as string) ?? null;
 }
 
 // ─── Register ───────────────────────────────────────────────────────────
@@ -154,28 +153,31 @@ export async function registerUser(
   }
 
   // Check if email already exists
-  const existing = await prisma.user.findUnique({ where: { email } });
+  const existing = db.user.findUnique({ where: { email } });
   if (existing) {
     return { success: false, error: "Email sudah terdaftar." };
   }
 
   const passwordHash = hashPassword(password);
 
-  const user = await prisma.user.create({
+  const user = db.user.create({
     data: {
       email,
       name,
       passwordHash,
       role: "MEMBER",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      avatarUrl: null,
     },
   });
 
   // Auto-login after register
   const session: SessionPayload = {
     userId: user.id,
-    email: user.email,
-    name: user.name,
-    role: user.role,
+    email: user.email as string,
+    name: user.name as string,
+    role: user.role as string,
   };
 
   const token = await createToken(session);

@@ -12,41 +12,10 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}
       JWT_SECRET: ${JWT_SECRET:-ecoswap-change-me-in-production}
-      RUN_SEED: ${RUN_SEED:-true}
-    depends_on:
-      mysql:
-        condition: service_healthy
     restart: unless-stopped
     volumes:
       - appraisal_uploads:/app/public/uploads
 
-  mysql:
-    image: mysql:8.4
-    container_name: ecoswap-mysql-prod
-    env_file:
-      - .env
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    volumes:
-      - mysql_prod_data:/var/lib/mysql
-      # Schema & seed via Prisma di container app (bukan init.sql)
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "mysqladmin ping -h 127.0.0.1 -u root -p\"$$MYSQL_ROOT_PASSWORD\" || exit 1",
-        ]
-      interval: 5s
-      timeout: 5s
-      retries: 12
-      start_period: 30s
-    restart: unless-stopped
-
 volumes:
-  mysql_prod_data:
   appraisal_uploads:

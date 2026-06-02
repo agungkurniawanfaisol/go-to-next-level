@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
 export type HeritageFormData = {
@@ -15,7 +15,7 @@ export type HeritageFormData = {
 
 export async function createHeritageItem(data: HeritageFormData) {
   try {
-    await prisma.heritageItem.create({
+    db.heritageItem.create({
       data: {
         name: data.name,
         region: data.region,
@@ -24,6 +24,8 @@ export async function createHeritageItem(data: HeritageFormData) {
         imageUrl: data.imageUrl || null,
         era: data.era || null,
         status: data.status,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       },
     });
     revalidatePath("/admin/heritage");
@@ -36,7 +38,7 @@ export async function createHeritageItem(data: HeritageFormData) {
 
 export async function updateHeritageItem(id: string, data: HeritageFormData) {
   try {
-    await prisma.heritageItem.update({
+    db.heritageItem.update({
       where: { id },
       data: {
         name: data.name,
@@ -46,6 +48,7 @@ export async function updateHeritageItem(id: string, data: HeritageFormData) {
         imageUrl: data.imageUrl || null,
         era: data.era || null,
         status: data.status,
+        updatedAt: new Date().toISOString(),
       },
     });
     revalidatePath("/admin/heritage");
@@ -61,7 +64,7 @@ export async function updateHeritageItem(id: string, data: HeritageFormData) {
 
 export async function deleteHeritageItem(id: string) {
   try {
-    await prisma.heritageItem.delete({ where: { id } });
+    db.heritageItem.delete({ where: { id } });
     revalidatePath("/admin/heritage");
     return { success: true as const };
   } catch (error) {

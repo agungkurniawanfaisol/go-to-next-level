@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import { saveAppraisalImage } from "@/lib/uploads";
 import { getValidSessionUserId } from "@/lib/auth";
 import type { AppraisalResultData } from "@/lib/appraisal-mock";
@@ -24,7 +24,7 @@ export async function saveAppraisalWithImage(
 
     const userId = await getValidSessionUserId();
 
-    const appraisal = await prisma.appraisal.create({
+    const appraisal = db.appraisal.create({
       data: {
         userId,
         imageName: file.name,
@@ -35,19 +35,32 @@ export async function saveAppraisalWithImage(
         conditionAnalysis: result.conditionAnalysis,
         ecoSwapPoints: result.ecoSwapPoints,
         inferenceMs: result.inferenceMs,
-        predictions: {
-          create: result.topPredictions.map((pred, i) => ({
-            label: pred.label,
-            probability: pred.probability,
-            rank: i + 1,
-          })),
-        },
+        modelVersion: "EcoSwap-Heritage-CNN v1.2",
+        openForBarter: false,
+        ownerName: null,
+        ownerCity: null,
+        swapDescription: null,
+        wantedItem: null,
+        publishedAt: null,
+        createdAt: new Date().toISOString(),
       },
+    });
+
+    // Create predictions
+    result.topPredictions.forEach((pred, i) => {
+      db.appraisalPrediction.create({
+        data: {
+          appraisalId: appraisal.id,
+          label: pred.label,
+          probability: pred.probability,
+          rank: i + 1,
+        },
+      });
     });
 
     const imagePath = await saveAppraisalImage(appraisal.id, file);
 
-    await prisma.appraisal.update({
+    db.appraisal.update({
       where: { id: appraisal.id },
       data: { imagePath },
     });

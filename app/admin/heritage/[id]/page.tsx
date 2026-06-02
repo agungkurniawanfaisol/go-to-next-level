@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import { AdminTopBar } from "@/components/admin/AdminTopBar";
 import { HeritageDetailClient } from "./client";
 
@@ -13,7 +13,7 @@ type PageProps = {
 export default async function HeritageDetailPage({ params }: PageProps) {
   const { id } = await params;
 
-  const item = await prisma.heritageItem.findUnique({
+  const item = db.heritageItem.findUnique({
     where: { id },
   });
 

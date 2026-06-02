@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { AdminBarterCard } from "@/components/admin/AdminBarterCard";
+import { AdminBarterMap } from "@/components/admin/AdminBarterMap";
 import type {
   AdminBarterPageData,
   BarterListing,
@@ -109,6 +110,13 @@ export function AdminBarterExplorer({ data }: AdminBarterExplorerProps) {
 
   const selectUser = (key: SelectedKey) => {
     setSelectedKey(key);
+    setMobileShowDetail(true);
+  };
+
+  const selectListing = (listingId: string) => {
+    const ownerKey =
+      listings.find((row) => row.id === listingId)?.userId ?? "guest";
+    setSelectedKey(ownerKey);
     setMobileShowDetail(true);
   };
 
@@ -222,7 +230,15 @@ export function AdminBarterExplorer({ data }: AdminBarterExplorerProps) {
               </span>
             </div>
           </div>
-          <div className="min-h-0 flex-1 overflow-y-auto">{detailContent}</div>
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <div className="border-b border-ink/8 p-4">
+              <AdminBarterMap
+                listings={listings}
+                onPickListing={selectListing}
+              />
+            </div>
+            {detailContent}
+          </div>
         </main>
       </div>
 
@@ -273,7 +289,15 @@ export function AdminBarterExplorer({ data }: AdminBarterExplorerProps) {
                 {selectedListings.length}
               </span>
             </div>
-            <div className="max-h-[75vh] overflow-y-auto">{detailContent}</div>
+            <div className="max-h-[75vh] overflow-y-auto">
+              <div className="border-b border-ink/8 p-4">
+                <AdminBarterMap
+                  listings={listings}
+                  onPickListing={selectListing}
+                />
+              </div>
+              {detailContent}
+            </div>
           </div>
         )}
       </div>

@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 
 export type CategoryStat = {
   category: string;
@@ -67,14 +67,8 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export async function getBarterStats(): Promise<BarterStatsData> {
-  const rows = await prisma.appraisal.findMany({
+  const rows = db.appraisal.findMany({
     where: { openForBarter: true },
-    select: {
-      detectedObject: true,
-      ecoSwapPoints: true,
-      roleClassification: true,
-      ownerName: true,
-    },
     orderBy: { ecoSwapPoints: "desc" },
   });
 

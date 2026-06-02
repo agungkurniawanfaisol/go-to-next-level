@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import type { ActionResult } from "@/lib/actions/barter";
 
 async function requireSession() {
@@ -35,10 +35,10 @@ export async function createBarterProposal(
   }
 
   try {
-    const [offered, requested] = await Promise.all([
-      prisma.appraisal.findUnique({ where: { id: offeredAppraisalId } }),
-      prisma.appraisal.findUnique({ where: { id: requestedAppraisalId } }),
-    ]);
+    const [offered, requested] = [
+      db.appraisal.findUnique({ where: { id: offeredAppraisalId } }),
+      db.appraisal.findUnique({ where: { id: requestedAppraisalId } }),
+    ];
 
     if (!offered?.openForBarter || !requested?.openForBarter) {
       return {
@@ -54,7 +54,7 @@ export async function createBarterProposal(
       };
     }
 
-    if (offered.ecoSwapPoints <= 0 || requested.ecoSwapPoints <= 0) {
+    if (Number(offered.ecoSwapPoints) <= 0 || Number(requested.ecoSwapPoints) <= 0) {
       return {
         success: false,
         error: "Kedua barang harus memiliki EcoSwap Points yang valid.",
@@ -65,7 +65,7 @@ export async function createBarterProposal(
       return { success: false, error: "Tidak bisa mengajukan barter ke barang sendiri." };
     }
 
-    const existingPending = await prisma.barterProposal.findFirst({
+    const existingPending = db.barterProposal.findFirst({
       where: {
         offeredAppraisalId,
         requestedAppraisalId,
@@ -80,12 +80,17 @@ export async function createBarterProposal(
       };
     }
 
-    const proposal = await prisma.barterProposal.create({
+    const proposal = db.barterProposal.create({
       data: {
         proposerUserId: auth.session.userId,
         offeredAppraisalId,
         requestedAppraisalId,
         message: message?.trim() || null,
+        status: "PENDING",
+        respondedAt: null,
+        completedAt: null,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       },
     });
 
@@ -106,7 +111,7 @@ export async function acceptBarterProposal(
   if (!auth.ok) return { success: false, error: auth.error };
 
   try {
-    const proposal = await prisma.barterProposal.findUnique({
+    const proposal = db.barterProposal.findUnique({
       where: { id: proposalId },
       include: { requestedAppraisal: { select: { userId: true } } },
     });
@@ -115,7 +120,7 @@ export async function acceptBarterProposal(
       return { success: false, error: "Permintaan tidak valid." };
     }
 
-    const recipientId = proposal.requestedAppraisal.userId;
+    const recipientId = (proposal.requestedAppraisal as any)?.userId;
     const isAdmin =
       auth.session.role === "SUPER_ADMIN" || auth.session.role === "CURATOR";
 
@@ -133,9 +138,9 @@ export async function acceptBarterProposal(
       };
     }
 
-    await prisma.barterProposal.update({
+    db.barterProposal.update({
       where: { id: proposalId },
-      data: { status: "ACCEPTED", respondedAt: new Date() },
+      data: { status: "ACCEPTED", respondedAt: new Date().toISOString() },
     });
 
     revalidateBarterPaths();
@@ -153,7 +158,7 @@ export async function rejectBarterProposal(
   if (!auth.ok) return { success: false, error: auth.error };
 
   try {
-    const proposal = await prisma.barterProposal.findUnique({
+    const proposal = db.barterProposal.findUnique({
       where: { id: proposalId },
       include: { requestedAppraisal: { select: { userId: true } } },
     });
@@ -162,7 +167,7 @@ export async function rejectBarterProposal(
       return { success: false, error: "Permintaan tidak valid." };
     }
 
-    const recipientId = proposal.requestedAppraisal.userId;
+    const recipientId = (proposal.requestedAppraisal as any)?.userId;
     const isAdmin =
       auth.session.role === "SUPER_ADMIN" || auth.session.role === "CURATOR";
 
@@ -177,9 +182,9 @@ export async function rejectBarterProposal(
       };
     }
 
-    await prisma.barterProposal.update({
+    db.barterProposal.update({
       where: { id: proposalId },
-      data: { status: "REJECTED", respondedAt: new Date() },
+      data: { status: "REJECTED", respondedAt: new Date().toISOString() },
     });
 
     revalidateBarterPaths();
@@ -197,7 +202,7 @@ export async function cancelBarterProposal(
   if (!auth.ok) return { success: false, error: auth.error };
 
   try {
-    const proposal = await prisma.barterProposal.findUnique({
+    const proposal = db.barterProposal.findUnique({
       where: { id: proposalId },
     });
 
@@ -209,9 +214,9 @@ export async function cancelBarterProposal(
       return { success: false, error: "Hanya pengaju yang bisa membatalkan." };
     }
 
-    await prisma.barterProposal.update({
+    db.barterProposal.update({
       where: { id: proposalId },
-      data: { status: "CANCELLED", respondedAt: new Date() },
+      data: { status: "CANCELLED", respondedAt: new Date().toISOString() },
     });
 
     revalidateBarterPaths();
@@ -229,7 +234,7 @@ export async function completeBarterProposal(
   if (!auth.ok) return { success: false, error: auth.error };
 
   try {
-    const proposal = await prisma.barterProposal.findUnique({
+    const proposal = db.barterProposal.findUnique({
       where: { id: proposalId },
       include: {
         requestedAppraisal: {
@@ -250,7 +255,7 @@ export async function completeBarterProposal(
 
     const isProposer = proposal.proposerUserId === auth.session.userId;
     const isRecipient =
-      proposal.requestedAppraisal.userId === auth.session.userId;
+      (proposal.requestedAppraisal as any)?.userId === auth.session.userId;
     const isAdmin =
       auth.session.role === "SUPER_ADMIN" || auth.session.role === "CURATOR";
 
@@ -259,30 +264,33 @@ export async function completeBarterProposal(
     }
 
     const currentUserId = auth.session.userId;
+
+    const offeredPoints = (proposal.offeredAppraisal as any)?.ecoSwapPoints ?? 0;
+    const offeredOpen = (proposal.offeredAppraisal as any)?.openForBarter;
+    const requestedPoints = (proposal.requestedAppraisal as any)?.ecoSwapPoints ?? 0;
+    const requestedOpen = (proposal.requestedAppraisal as any)?.openForBarter;
+
     const pointsDeducted =
-      (proposal.offeredAppraisal.userId === currentUserId &&
-      proposal.offeredAppraisal.openForBarter
-        ? proposal.offeredAppraisal.ecoSwapPoints
+      ((proposal.offeredAppraisal as any)?.userId === currentUserId && offeredOpen
+        ? Number(offeredPoints)
         : 0) +
-      (proposal.requestedAppraisal.userId === currentUserId &&
-      proposal.requestedAppraisal.openForBarter
-        ? proposal.requestedAppraisal.ecoSwapPoints
+      ((proposal.requestedAppraisal as any)?.userId === currentUserId && requestedOpen
+        ? Number(requestedPoints)
         : 0);
 
-    await prisma.$transaction([
-      prisma.barterProposal.update({
-        where: { id: proposalId },
-        data: { status: "COMPLETED", completedAt: new Date() },
-      }),
-      prisma.appraisal.updateMany({
-        where: {
-          id: { in: [proposal.offeredAppraisalId, proposal.requestedAppraisalId] },
-        },
-        data: { openForBarter: false, publishedAt: null },
-      }),
-    ]);
+    db.barterProposal.update({
+      where: { id: proposalId },
+      data: { status: "COMPLETED", completedAt: new Date().toISOString() },
+    });
 
-    const newPoints = await prisma.appraisal.aggregate({
+    db.appraisal.updateMany({
+      where: {
+        id: { in: [proposal.offeredAppraisalId as string, proposal.requestedAppraisalId as string] },
+      },
+      data: { openForBarter: false, publishedAt: null },
+    });
+
+    const newPointsResult = db.appraisal.aggregate({
       where: { userId: currentUserId, openForBarter: true },
       _sum: { ecoSwapPoints: true },
     });
@@ -294,7 +302,7 @@ export async function completeBarterProposal(
     return {
       success: true,
       pointsDeducted,
-      newPoints: newPoints._sum.ecoSwapPoints ?? 0,
+      newPoints: newPointsResult._sum?.ecoSwapPoints ?? 0,
     };
   } catch (error) {
     console.error("[completeBarterProposal]", error);

@@ -1,0 +1,1157 @@
+[
+  {
+    "id": "cldmpwp9xdb000t",
+    "appraisalId": "cldmpwp9xdb000s",
+    "label": "Batik Tulis",
+    "probability": 98.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdb000u",
+    "appraisalId": "cldmpwp9xdb000s",
+    "label": "Tenun Ikat",
+    "probability": 1,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdb000v",
+    "appraisalId": "cldmpwp9xdb000s",
+    "label": "Songket",
+    "probability": 0.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdb000x",
+    "appraisalId": "cldmpwp9xdb000w",
+    "label": "Ukiran Kayu",
+    "probability": 91.8,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdb000y",
+    "appraisalId": "cldmpwp9xdb000w",
+    "label": "Anyaman Bambu",
+    "probability": 5.2,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdb000z",
+    "appraisalId": "cldmpwp9xdb000w",
+    "label": "Keramik",
+    "probability": 3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdb0011",
+    "appraisalId": "cldmpwp9xdb0010",
+    "label": "Tenun Ikat",
+    "probability": 94.2,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdb0012",
+    "appraisalId": "cldmpwp9xdb0010",
+    "label": "Songket",
+    "probability": 3.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdb0013",
+    "appraisalId": "cldmpwp9xdb0010",
+    "label": "Batik Tulis",
+    "probability": 2.3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdb0015",
+    "appraisalId": "cldmpwp9xdb0014",
+    "label": "Songket Palembang",
+    "probability": 96.1,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdb0016",
+    "appraisalId": "cldmpwp9xdb0014",
+    "label": "Tenun Ikat",
+    "probability": 2.4,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdb0017",
+    "appraisalId": "cldmpwp9xdb0014",
+    "label": "Batik Tulis",
+    "probability": 1.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdb0019",
+    "appraisalId": "cldmpwp9xdb0018",
+    "label": "Wayang Golek",
+    "probability": 88.7,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdb001a",
+    "appraisalId": "cldmpwp9xdb0018",
+    "label": "Topeng",
+    "probability": 7.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdb001b",
+    "appraisalId": "cldmpwp9xdb0018",
+    "label": "Ukiran",
+    "probability": 3.8,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdb001d",
+    "appraisalId": "cldmpwp9xdb001c",
+    "label": "Gamelan",
+    "probability": 92.3,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdb001e",
+    "appraisalId": "cldmpwp9xdb001c",
+    "label": "Angklung",
+    "probability": 4.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdb001f",
+    "appraisalId": "cldmpwp9xdb001c",
+    "label": "Wayang",
+    "probability": 3.2,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdb001h",
+    "appraisalId": "cldmpwp9xdb001g",
+    "label": "Topeng Tradisional",
+    "probability": 85.9,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdb001i",
+    "appraisalId": "cldmpwp9xdb001g",
+    "label": "Wayang Golek",
+    "probability": 8.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdb001j",
+    "appraisalId": "cldmpwp9xdb001g",
+    "label": "Ukiran",
+    "probability": 5.6,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdb001l",
+    "appraisalId": "cldmpwp9xdb001k",
+    "label": "Angklung",
+    "probability": 84.1,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdb001m",
+    "appraisalId": "cldmpwp9xdb001k",
+    "label": "Gamelan",
+    "probability": 10.2,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdb001n",
+    "appraisalId": "cldmpwp9xdb001k",
+    "label": "Karinding",
+    "probability": 5.7,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdc001p",
+    "appraisalId": "cldmpwp9xdb001o",
+    "label": "Batik Tulis",
+    "probability": 93.7,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdc001q",
+    "appraisalId": "cldmpwp9xdb001o",
+    "label": "Songket",
+    "probability": 3.8,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdc001r",
+    "appraisalId": "cldmpwp9xdb001o",
+    "label": "Tenun Ikat",
+    "probability": 2.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd001t",
+    "appraisalId": "cldmpwp9xdc001s",
+    "label": "Songket",
+    "probability": 90.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd001u",
+    "appraisalId": "cldmpwp9xdc001s",
+    "label": "Tenun Ikat",
+    "probability": 6,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd001v",
+    "appraisalId": "cldmpwp9xdc001s",
+    "label": "Batik",
+    "probability": 3.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd001x",
+    "appraisalId": "cldmpwp9xdd001w",
+    "label": "Reog",
+    "probability": 87.2,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd001y",
+    "appraisalId": "cldmpwp9xdd001w",
+    "label": "Topeng",
+    "probability": 7.8,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd001z",
+    "appraisalId": "cldmpwp9xdd001w",
+    "label": "Wayang",
+    "probability": 5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0021",
+    "appraisalId": "cldmpwp9xdd0020",
+    "label": "Batik Tulis",
+    "probability": 95.8,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0022",
+    "appraisalId": "cldmpwp9xdd0020",
+    "label": "Tenun",
+    "probability": 2.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0023",
+    "appraisalId": "cldmpwp9xdd0020",
+    "label": "Songket",
+    "probability": 1.7,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0025",
+    "appraisalId": "cldmpwp9xdd0024",
+    "label": "Keramik Tradisional",
+    "probability": 87.3,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0026",
+    "appraisalId": "cldmpwp9xdd0024",
+    "label": "Anyaman Bambu",
+    "probability": 8,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0027",
+    "appraisalId": "cldmpwp9xdd0024",
+    "label": "Gerabah",
+    "probability": 4.7,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0029",
+    "appraisalId": "cldmpwp9xdd0028",
+    "label": "Anyaman Bambu",
+    "probability": 82.4,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd002a",
+    "appraisalId": "cldmpwp9xdd0028",
+    "label": "Keramik Tradisional",
+    "probability": 10,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd002b",
+    "appraisalId": "cldmpwp9xdd0028",
+    "label": "Ukiran Kayu",
+    "probability": 7.6,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd002d",
+    "appraisalId": "cldmpwp9xdd002c",
+    "label": "Gerabah",
+    "probability": 79.8,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd002e",
+    "appraisalId": "cldmpwp9xdd002c",
+    "label": "Keramik",
+    "probability": 12.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd002f",
+    "appraisalId": "cldmpwp9xdd002c",
+    "label": "Anyaman",
+    "probability": 7.7,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd002h",
+    "appraisalId": "cldmpwp9xdd002g",
+    "label": "Wayang Kulit",
+    "probability": 86.1,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd002i",
+    "appraisalId": "cldmpwp9xdd002g",
+    "label": "Wayang Golek",
+    "probability": 8,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd002j",
+    "appraisalId": "cldmpwp9xdd002g",
+    "label": "Topeng",
+    "probability": 5.9,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd002l",
+    "appraisalId": "cldmpwp9xdd002k",
+    "label": "Vas Keramik",
+    "probability": 76.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd002m",
+    "appraisalId": "cldmpwp9xdd002k",
+    "label": "Gerabah",
+    "probability": 14,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd002n",
+    "appraisalId": "cldmpwp9xdd002k",
+    "label": "Keramik",
+    "probability": 9.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd002p",
+    "appraisalId": "cldmpwp9xdd002o",
+    "label": "Karpet Tenun",
+    "probability": 81.3,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd002q",
+    "appraisalId": "cldmpwp9xdd002o",
+    "label": "Tenun Ikat",
+    "probability": 11,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd002r",
+    "appraisalId": "cldmpwp9xdd002o",
+    "label": "Songket",
+    "probability": 7.7,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd002t",
+    "appraisalId": "cldmpwp9xdd002s",
+    "label": "Dekorasi Ukiran",
+    "probability": 83.7,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd002u",
+    "appraisalId": "cldmpwp9xdd002s",
+    "label": "Topeng",
+    "probability": 9,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd002v",
+    "appraisalId": "cldmpwp9xdd002s",
+    "label": "Wayang",
+    "probability": 7.3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd002x",
+    "appraisalId": "cldmpwp9xdd002w",
+    "label": "Lampu Anyaman",
+    "probability": 77.2,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd002y",
+    "appraisalId": "cldmpwp9xdd002w",
+    "label": "Anyaman Bambu",
+    "probability": 15,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd002z",
+    "appraisalId": "cldmpwp9xdd002w",
+    "label": "Dekorasi",
+    "probability": 7.8,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0031",
+    "appraisalId": "cldmpwp9xdd0030",
+    "label": "Cermin Ukir",
+    "probability": 74.9,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0032",
+    "appraisalId": "cldmpwp9xdd0030",
+    "label": "Ukiran Kayu",
+    "probability": 16,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0033",
+    "appraisalId": "cldmpwp9xdd0030",
+    "label": "Dekorasi",
+    "probability": 9.1,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0035",
+    "appraisalId": "cldmpwp9xdd0034",
+    "label": "Kursi Ukiran",
+    "probability": 85,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0036",
+    "appraisalId": "cldmpwp9xdd0034",
+    "label": "Meja Jati",
+    "probability": 8.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0037",
+    "appraisalId": "cldmpwp9xdd0034",
+    "label": "Furniture",
+    "probability": 6.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0039",
+    "appraisalId": "cldmpwp9xdd0038",
+    "label": "Laptop Bekas",
+    "probability": 94.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd003a",
+    "appraisalId": "cldmpwp9xdd0038",
+    "label": "Elektronik",
+    "probability": 4,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd003b",
+    "appraisalId": "cldmpwp9xdd0038",
+    "label": "Aksesoris",
+    "probability": 1.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd003d",
+    "appraisalId": "cldmpwp9xdd003c",
+    "label": "Smartphone",
+    "probability": 96,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd003e",
+    "appraisalId": "cldmpwp9xdd003c",
+    "label": "Elektronik",
+    "probability": 3,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd003f",
+    "appraisalId": "cldmpwp9xdd003c",
+    "label": "Aksesoris",
+    "probability": 1,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd003h",
+    "appraisalId": "cldmpwp9xdd003g",
+    "label": "Kamera DSLR",
+    "probability": 93.8,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd003i",
+    "appraisalId": "cldmpwp9xdd003g",
+    "label": "Lensa Kamera",
+    "probability": 3.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd003j",
+    "appraisalId": "cldmpwp9xdd003g",
+    "label": "Elektronik",
+    "probability": 2.7,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd003l",
+    "appraisalId": "cldmpwp9xdd003k",
+    "label": "Headphone",
+    "probability": 95.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd003m",
+    "appraisalId": "cldmpwp9xdd003k",
+    "label": "Elektronik",
+    "probability": 3,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd003n",
+    "appraisalId": "cldmpwp9xdd003k",
+    "label": "Aksesoris",
+    "probability": 1.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd003p",
+    "appraisalId": "cldmpwp9xdd003o",
+    "label": "Speaker Bluetooth",
+    "probability": 94,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd003q",
+    "appraisalId": "cldmpwp9xdd003o",
+    "label": "Headphone",
+    "probability": 3.8,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd003r",
+    "appraisalId": "cldmpwp9xdd003o",
+    "label": "Elektronik",
+    "probability": 2.2,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd003t",
+    "appraisalId": "cldmpwp9xdd003s",
+    "label": "Rice Cooker",
+    "probability": 92,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd003u",
+    "appraisalId": "cldmpwp9xdd003s",
+    "label": "Peralatan Dapur",
+    "probability": 5.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd003v",
+    "appraisalId": "cldmpwp9xdd003s",
+    "label": "Elektronik",
+    "probability": 2.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd003x",
+    "appraisalId": "cldmpwp9xdd003w",
+    "label": "Kipas Angin",
+    "probability": 91,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd003y",
+    "appraisalId": "cldmpwp9xdd003w",
+    "label": "Peralatan Rumah",
+    "probability": 6,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd003z",
+    "appraisalId": "cldmpwp9xdd003w",
+    "label": "Elektronik",
+    "probability": 3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0041",
+    "appraisalId": "cldmpwp9xdd0040",
+    "label": "Microwave",
+    "probability": 90.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0042",
+    "appraisalId": "cldmpwp9xdd0040",
+    "label": "Peralatan Dapur",
+    "probability": 6,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0043",
+    "appraisalId": "cldmpwp9xdd0040",
+    "label": "Elektronik",
+    "probability": 3.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0045",
+    "appraisalId": "cldmpwp9xdd0044",
+    "label": "TV LED",
+    "probability": 94,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0046",
+    "appraisalId": "cldmpwp9xdd0044",
+    "label": "Monitor",
+    "probability": 3.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0047",
+    "appraisalId": "cldmpwp9xdd0044",
+    "label": "Elektronik",
+    "probability": 2.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0049",
+    "appraisalId": "cldmpwp9xdd0048",
+    "label": "Blender",
+    "probability": 88.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd004a",
+    "appraisalId": "cldmpwp9xdd0048",
+    "label": "Peralatan Dapur",
+    "probability": 7.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd004b",
+    "appraisalId": "cldmpwp9xdd0048",
+    "label": "Elektronik",
+    "probability": 4,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd004d",
+    "appraisalId": "cldmpwp9xdd004c",
+    "label": "MacBook",
+    "probability": 96,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd004e",
+    "appraisalId": "cldmpwp9xdd004c",
+    "label": "Laptop Bekas",
+    "probability": 2.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd004f",
+    "appraisalId": "cldmpwp9xdd004c",
+    "label": "Elektronik",
+    "probability": 1.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd004h",
+    "appraisalId": "cldmpwp9xdd004g",
+    "label": "Smartwatch",
+    "probability": 93.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd004i",
+    "appraisalId": "cldmpwp9xdd004g",
+    "label": "Jam Tangan",
+    "probability": 3.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd004j",
+    "appraisalId": "cldmpwp9xdd004g",
+    "label": "Aksesoris",
+    "probability": 3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd004l",
+    "appraisalId": "cldmpwp9xdd004k",
+    "label": "Mobil Bekas",
+    "probability": 96.2,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd004m",
+    "appraisalId": "cldmpwp9xdd004k",
+    "label": "Kendaraan",
+    "probability": 2.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd004n",
+    "appraisalId": "cldmpwp9xdd004k",
+    "label": "Aksesoris Mobil",
+    "probability": 1.3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd004p",
+    "appraisalId": "cldmpwp9xdd004o",
+    "label": "Motor Matic",
+    "probability": 95,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd004q",
+    "appraisalId": "cldmpwp9xdd004o",
+    "label": "Kendaraan",
+    "probability": 3,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd004r",
+    "appraisalId": "cldmpwp9xdd004o",
+    "label": "Aksesoris Motor",
+    "probability": 2,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd004t",
+    "appraisalId": "cldmpwp9xdd004s",
+    "label": "Sepeda Gunung",
+    "probability": 93,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd004u",
+    "appraisalId": "cldmpwp9xdd004s",
+    "label": "Sepeda",
+    "probability": 4.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd004v",
+    "appraisalId": "cldmpwp9xdd004s",
+    "label": "Aksesoris",
+    "probability": 2.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd004x",
+    "appraisalId": "cldmpwp9xdd004w",
+    "label": "Skuter Listrik",
+    "probability": 91.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd004y",
+    "appraisalId": "cldmpwp9xdd004w",
+    "label": "Kendaraan",
+    "probability": 5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd004z",
+    "appraisalId": "cldmpwp9xdd004w",
+    "label": "Elektronik",
+    "probability": 3.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0051",
+    "appraisalId": "cldmpwp9xdd0050",
+    "label": "Mobil Keluarga",
+    "probability": 95.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0052",
+    "appraisalId": "cldmpwp9xdd0050",
+    "label": "Kendaraan",
+    "probability": 2.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0053",
+    "appraisalId": "cldmpwp9xdd0050",
+    "label": "Aksesoris Mobil",
+    "probability": 2,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0055",
+    "appraisalId": "cldmpwp9xdd0054",
+    "label": "Sepeda Lipat",
+    "probability": 90,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0056",
+    "appraisalId": "cldmpwp9xdd0054",
+    "label": "Sepeda",
+    "probability": 6.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0057",
+    "appraisalId": "cldmpwp9xdd0054",
+    "label": "Aksesoris",
+    "probability": 3.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0059",
+    "appraisalId": "cldmpwp9xdd0058",
+    "label": "Jaket Kulit",
+    "probability": 92.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd005a",
+    "appraisalId": "cldmpwp9xdd0058",
+    "label": "Fashion",
+    "probability": 4.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd005b",
+    "appraisalId": "cldmpwp9xdd0058",
+    "label": "Aksesoris",
+    "probability": 3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd005d",
+    "appraisalId": "cldmpwp9xdd005c",
+    "label": "Tas Ransel",
+    "probability": 93,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd005e",
+    "appraisalId": "cldmpwp9xdd005c",
+    "label": "Tas",
+    "probability": 4,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd005f",
+    "appraisalId": "cldmpwp9xdd005c",
+    "label": "Fashion",
+    "probability": 3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd005h",
+    "appraisalId": "cldmpwp9xdd005g",
+    "label": "Sepatu Sneakers",
+    "probability": 94.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd005i",
+    "appraisalId": "cldmpwp9xdd005g",
+    "label": "Fashion",
+    "probability": 3.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd005j",
+    "appraisalId": "cldmpwp9xdd005g",
+    "label": "Aksesoris",
+    "probability": 2,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd005l",
+    "appraisalId": "cldmpwp9xdd005k",
+    "label": "Jam Tangan",
+    "probability": 95,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd005m",
+    "appraisalId": "cldmpwp9xdd005k",
+    "label": "Aksesoris",
+    "probability": 3,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd005n",
+    "appraisalId": "cldmpwp9xdd005k",
+    "label": "Fashion",
+    "probability": 2,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd005p",
+    "appraisalId": "cldmpwp9xdd005o",
+    "label": "Tas Kulit",
+    "probability": 90,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd005q",
+    "appraisalId": "cldmpwp9xdd005o",
+    "label": "Aksesoris",
+    "probability": 6,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd005r",
+    "appraisalId": "cldmpwp9xdd005o",
+    "label": "Fashion",
+    "probability": 4,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd005t",
+    "appraisalId": "cldmpwp9xdd005s",
+    "label": "Kemeja Batik",
+    "probability": 89.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd005u",
+    "appraisalId": "cldmpwp9xdd005s",
+    "label": "Batik",
+    "probability": 7,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd005v",
+    "appraisalId": "cldmpwp9xdd005s",
+    "label": "Fashion",
+    "probability": 3.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd005x",
+    "appraisalId": "cldmpwp9xdd005w",
+    "label": "Syal Batik",
+    "probability": 87.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd005y",
+    "appraisalId": "cldmpwp9xdd005w",
+    "label": "Batik",
+    "probability": 8,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd005z",
+    "appraisalId": "cldmpwp9xdd005w",
+    "label": "Fashion",
+    "probability": 4.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0061",
+    "appraisalId": "cldmpwp9xdd0060",
+    "label": "Meja Kayu",
+    "probability": 92,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0062",
+    "appraisalId": "cldmpwp9xdd0060",
+    "label": "Furniture",
+    "probability": 5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0063",
+    "appraisalId": "cldmpwp9xdd0060",
+    "label": "Dekorasi",
+    "probability": 3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0065",
+    "appraisalId": "cldmpwp9xdd0064",
+    "label": "Lemari Pakaian",
+    "probability": 91,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd0066",
+    "appraisalId": "cldmpwp9xdd0064",
+    "label": "Furniture",
+    "probability": 6,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd0067",
+    "appraisalId": "cldmpwp9xdd0064",
+    "label": "Dekorasi",
+    "probability": 3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd0069",
+    "appraisalId": "cldmpwp9xdd0068",
+    "label": "Kasur Busa",
+    "probability": 89.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd006a",
+    "appraisalId": "cldmpwp9xdd0068",
+    "label": "Furniture",
+    "probability": 6.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd006b",
+    "appraisalId": "cldmpwp9xdd0068",
+    "label": "Perlengkapan Rumah",
+    "probability": 4,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd006d",
+    "appraisalId": "cldmpwp9xdd006c",
+    "label": "Rak Buku",
+    "probability": 90,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd006e",
+    "appraisalId": "cldmpwp9xdd006c",
+    "label": "Furniture",
+    "probability": 6,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd006f",
+    "appraisalId": "cldmpwp9xdd006c",
+    "label": "Dekorasi",
+    "probability": 4,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd006h",
+    "appraisalId": "cldmpwp9xdd006g",
+    "label": "Sofa",
+    "probability": 92.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd006i",
+    "appraisalId": "cldmpwp9xdd006g",
+    "label": "Furniture",
+    "probability": 4.5,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd006j",
+    "appraisalId": "cldmpwp9xdd006g",
+    "label": "Dekorasi",
+    "probability": 3,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd006l",
+    "appraisalId": "cldmpwp9xdd006k",
+    "label": "Lemari Buku",
+    "probability": 89,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd006m",
+    "appraisalId": "cldmpwp9xdd006k",
+    "label": "Furniture",
+    "probability": 7,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd006n",
+    "appraisalId": "cldmpwp9xdd006k",
+    "label": "Dekorasi",
+    "probability": 4,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd006p",
+    "appraisalId": "cldmpwp9xdd006o",
+    "label": "Meja Rotan",
+    "probability": 86.5,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd006q",
+    "appraisalId": "cldmpwp9xdd006o",
+    "label": "Furniture",
+    "probability": 8,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd006r",
+    "appraisalId": "cldmpwp9xdd006o",
+    "label": "Anyaman",
+    "probability": 5.5,
+    "rank": 3
+  },
+  {
+    "id": "cldmpwp9xdd006t",
+    "appraisalId": "cldmpwp9xdd006s",
+    "label": "Karpet",
+    "probability": 88,
+    "rank": 1
+  },
+  {
+    "id": "cldmpwp9xdd006u",
+    "appraisalId": "cldmpwp9xdd006s",
+    "label": "Dekorasi",
+    "probability": 7,
+    "rank": 2
+  },
+  {
+    "id": "cldmpwp9xdd006v",
+    "appraisalId": "cldmpwp9xdd006s",
+    "label": "Tekstil",
+    "probability": 5,
+    "rank": 3
+  }
+]

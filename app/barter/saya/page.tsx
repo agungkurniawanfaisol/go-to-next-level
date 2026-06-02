@@ -4,36 +4,26 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { HeaderWithSession } from "@/components/HeaderWithSession";
 import { getSession } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import { getUserBarterProposals } from "@/lib/api/barter-proposals";
 import { BarterProposalCard } from "@/components/barter/BarterProposalCard";
 import { formatDateShortId } from "@/lib/format-date-id";
 
 async function getMyDashboard(userId: string) {
-  const [totalPointsResult, myItems, { sent, received }] = await Promise.all([
-    prisma.appraisal.aggregate({
-      // Poin = jumlah EcoSwap Points dari barang yang masih dipublikasikan/aktif di List Barter.
-      where: { userId, openForBarter: true },
-      _sum: { ecoSwapPoints: true },
-    }),
-    prisma.appraisal.findMany({
-      where: { userId, openForBarter: true },
-      select: {
-        id: true,
-        detectedObject: true,
-        imagePath: true,
-        ecoSwapPoints: true,
-        publishedAt: true,
-        ownerName: true,
-        ownerCity: true,
-      },
-      orderBy: { publishedAt: "desc" },
-    }),
-    getUserBarterProposals(userId),
-  ]);
+  const totalPointsResult = db.appraisal.aggregate({
+    where: { userId, openForBarter: true },
+    _sum: { ecoSwapPoints: true },
+  });
+
+  const myItems = db.appraisal.findMany({
+    where: { userId, openForBarter: true },
+    orderBy: { publishedAt: "desc" },
+  });
+
+  const { sent, received } = await getUserBarterProposals(userId);
 
   return {
-    totalPoints: totalPointsResult._sum.ecoSwapPoints ?? 0,
+    totalPoints: totalPointsResult._sum?.ecoSwapPoints ?? 0,
     publishedCount: myItems.length,
     myItems,
     activeProposals: { sent, received },

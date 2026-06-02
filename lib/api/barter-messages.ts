@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 
 export type BarterMessageView = {
   id: string;
@@ -11,7 +11,7 @@ export type BarterMessageView = {
 export async function getBarterMessages(
   proposalId: string,
 ): Promise<BarterMessageView[]> {
-  const rows = await prisma.barterMessage.findMany({
+  const rows = db.barterMessage.findMany({
     where: { proposalId },
     include: {
       sender: { select: { id: true, name: true } },
@@ -19,11 +19,11 @@ export async function getBarterMessages(
     orderBy: { createdAt: "asc" },
   });
 
-  return rows.map((row) => ({
+  return rows.map((row: any) => ({
     id: row.id,
     senderId: row.senderId,
-    senderName: row.sender.name,
+    senderName: row.sender?.name ?? "Unknown",
     message: row.message,
-    createdAt: row.createdAt,
+    createdAt: new Date(row.createdAt),
   }));
 }

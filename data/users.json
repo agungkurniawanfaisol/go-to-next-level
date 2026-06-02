@@ -1,0 +1,152 @@
+[
+  {
+    "id": "cldmpwp9xd90001",
+    "email": "admin@ecoswap.id",
+    "name": "Admin EcoSwap",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "SUPER_ADMIN",
+    "avatarUrl": null,
+    "createdAt": "2026-04-03T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd90002",
+    "email": "siti@email.com",
+    "name": "Siti Rahayu",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-08T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd90003",
+    "email": "budi@email.com",
+    "name": "Budi Santoso",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-08T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd90004",
+    "email": "rina@email.com",
+    "name": "Rina Wijaya",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "CURATOR",
+    "avatarUrl": null,
+    "createdAt": "2026-04-08T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd90005",
+    "email": "agus@email.com",
+    "name": "Agus Prasetyo",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-13T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd90006",
+    "email": "dewi@email.com",
+    "name": "Dewi Lestari",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-13T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd90007",
+    "email": "hadi@email.com",
+    "name": "Hadi Nugroho",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-18T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd90008",
+    "email": "maya@email.com",
+    "name": "Maya Putri",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-18T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd90009",
+    "email": "eko@email.com",
+    "name": "Eko Wahyudi",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-23T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd9000a",
+    "email": "fitri@email.com",
+    "name": "Fitri Handayani",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-23T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd9000b",
+    "email": "dimas@email.com",
+    "name": "Dimas Aditya",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-28T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd9000c",
+    "email": "ratna@email.com",
+    "name": "Ratna Kusuma",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-04-28T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd9000d",
+    "email": "arief@email.com",
+    "name": "Arief Hidayat",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-05-03T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd9000e",
+    "email": "nina@email.com",
+    "name": "Nina Safitri",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-05-03T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  },
+  {
+    "id": "cldmpwp9xd9000f",
+    "email": "irfan@email.com",
+    "name": "Irfan Hakim",
+    "passwordHash": "ecoswap-demo-salt-16byte:e1858be4ce81d58689298b79854436bff4f9e2b06ef0ad0ab2abb3c235492b51d27546a4ae19e3bf8b4ccd3f05babe18bcd0555852077702f08fee260ad61b41",
+    "role": "MEMBER",
+    "avatarUrl": null,
+    "createdAt": "2026-05-08T13:55:39.693Z",
+    "updatedAt": "2026-06-01T13:55:39.693Z"
+  }
+]

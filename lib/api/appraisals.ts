@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 
 export type DashboardStats = {
   totalAppraisals: number;
@@ -53,40 +53,34 @@ export type UserData = {
 // ─── Dashboard ────────────────────────────────────────────────────────────
 
 export async function getDashboardStats(): Promise<DashboardStats> {
-  const [
-    totalAppraisals,
-    totalPointsResult,
-    totalHeritageItems,
-    activeUsers,
-    lastWeekAppraisals,
-    lastWeekPointsResult,
-  ] = await Promise.all([
-    prisma.appraisal.count(),
-    prisma.appraisal.aggregate({ _sum: { ecoSwapPoints: true } }),
-    prisma.heritageItem.count({ where: { status: "ACTIVE" } }),
-    prisma.user.count(),
-    // Last-week counts for change calculation
-    prisma.appraisal.count({
-      where: {
-        createdAt: {
-          gte: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000),
-          lt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-        },
-      },
-    }),
-    prisma.appraisal.aggregate({
-      _sum: { ecoSwapPoints: true },
-      where: {
-        createdAt: {
-          gte: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000),
-          lt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-        },
-      },
-    }),
-  ]);
+  const now = new Date();
+  const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000).toISOString();
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
 
-  const totalPoints = totalPointsResult._sum.ecoSwapPoints ?? 0;
-  const prevWeekPoints = lastWeekPointsResult._sum.ecoSwapPoints ?? 0;
+  const totalAppraisals = db.appraisal.count();
+  const totalPointsResult = db.appraisal.aggregate({ _sum: { ecoSwapPoints: true } });
+  const totalHeritageItems = db.heritageItem.count({ where: { status: "ACTIVE" } });
+  const activeUsers = db.user.count();
+  const lastWeekAppraisals = db.appraisal.count({
+    where: {
+      createdAt: {
+        gte: fourteenDaysAgo,
+        lt: sevenDaysAgo,
+      },
+    },
+  });
+  const lastWeekPointsResult = db.appraisal.aggregate({
+    _sum: { ecoSwapPoints: true },
+    where: {
+      createdAt: {
+        gte: fourteenDaysAgo,
+        lt: sevenDaysAgo,
+      },
+    },
+  });
+
+  const totalPoints = totalPointsResult._sum?.ecoSwapPoints ?? 0;
+  const prevWeekPoints = lastWeekPointsResult._sum?.ecoSwapPoints ?? 0;
 
   // Calculate percentage changes (simplified relative to baseline)
   const calcChange = (current: number, previous: number): string => {
@@ -102,7 +96,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     activeUsers,
     statsChange: {
       appraisals: calcChange(totalAppraisals, lastWeekAppraisals),
-      points: calcChange(Number(totalPoints), Number(prevWeekPoints)),
+      points: calcChange(totalPoints, prevWeekPoints),
       heritage: "+0%", // static until heritage CRUD
       users: "+0%",    // static until registration
     },
@@ -112,34 +106,34 @@ export async function getDashboardStats(): Promise<DashboardStats> {
 export async function getRecentAppraisals(
   limit = 5,
 ): Promise<RecentAppraisal[]> {
-  const rows = await prisma.appraisal.findMany({
+  const rows = db.appraisal.findMany({
     orderBy: { createdAt: "desc" },
     take: limit,
   });
 
-  return rows.map((r) => ({
+  return rows.map((r: any) => ({
     id: r.id,
     detectedObject: r.detectedObject,
     ecoSwapPoints: r.ecoSwapPoints,
     confidenceScore: Number(r.confidenceScore),
-    createdAt: r.createdAt,
+    createdAt: new Date(r.createdAt),
   }));
 }
 
 // ─── Appraisal Logs ───────────────────────────────────────────────────────
 
 export async function getAppraisalLogs(): Promise<AppraisalLog[]> {
-  const rows = await prisma.appraisal.findMany({
+  const rows = db.appraisal.findMany({
     orderBy: { createdAt: "desc" },
     take: 50,
   });
 
-  return rows.map((r) => ({
+  return rows.map((r: any) => ({
     id: r.id,
     detectedObject: r.detectedObject,
     confidenceScore: Number(r.confidenceScore),
     ecoSwapPoints: r.ecoSwapPoints,
-    createdAt: r.createdAt,
+    createdAt: new Date(r.createdAt),
     imageName: r.imageName,
     imagePath: r.imagePath,
     openForBarter: r.openForBarter,
@@ -149,33 +143,33 @@ export async function getAppraisalLogs(): Promise<AppraisalLog[]> {
 // ─── Heritage Catalog ─────────────────────────────────────────────────────
 
 export async function getHeritageCatalog(): Promise<HeritageItemData[]> {
-  const items = await prisma.heritageItem.findMany({
+  const items = db.heritageItem.findMany({
     orderBy: { name: "asc" },
   });
 
-  return items.map((i) => ({
+  return items.map((i: any) => ({
     id: i.id,
-    name: i.name,
-    region: i.region,
-    category: i.category,
-    description: i.description,
-    imageUrl: i.imageUrl,
-    era: i.era,
-    status: i.status,
+    name: i.name as string,
+    region: i.region as string,
+    category: i.category as string,
+    description: i.description as string | null,
+    imageUrl: i.imageUrl as string | null,
+    era: i.era as string | null,
+    status: i.status as string,
   }));
 }
 
 // ─── Users ────────────────────────────────────────────────────────────────
 
 export async function getUsers(): Promise<UserData[]> {
-  const users = await prisma.user.findMany({
+  const users = db.user.findMany({
     orderBy: { createdAt: "asc" },
   });
 
-  return users.map((u) => ({
+  return users.map((u: any) => ({
     id: u.id,
-    name: u.name,
-    email: u.email,
-    role: u.role,
+    name: u.name as string,
+    email: u.email as string,
+    role: u.role as string,
   }));
 }

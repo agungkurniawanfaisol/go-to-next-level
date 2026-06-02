@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 
 export async function sendBarterMessage(
   proposalId: string,
@@ -23,7 +23,7 @@ export async function sendBarterMessage(
 
   try {
     // Verify user is participant of this proposal
-    const proposal = await prisma.barterProposal.findUnique({
+    const proposal = db.barterProposal.findUnique({
       where: { id: proposalId },
       include: {
         offeredAppraisal: { select: { userId: true } },
@@ -36,7 +36,7 @@ export async function sendBarterMessage(
     }
 
     const isProposer = proposal.proposerUserId === session.userId;
-    const isRecipient = proposal.requestedAppraisal.userId === session.userId;
+    const isRecipient = (proposal.requestedAppraisal as any)?.userId === session.userId;
     const isAdmin =
       session.role === "SUPER_ADMIN" || session.role === "CURATOR";
 
@@ -47,11 +47,12 @@ export async function sendBarterMessage(
       };
     }
 
-    await prisma.barterMessage.create({
+    db.barterMessage.create({
       data: {
         proposalId,
         senderId: session.userId,
         message: message.trim(),
+        createdAt: new Date().toISOString(),
       },
     });
 

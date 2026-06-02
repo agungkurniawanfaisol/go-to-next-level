@@ -8,31 +8,25 @@
     "build": "next build",
     "start": "next start -p 5173",
     "lint": "eslint",
-    "db:push": "prisma db push",
-    "db:seed": "npx tsx prisma/seed.ts",
-    "db:setup": "prisma db push && npm run db:seed",
-    "postinstall": "prisma generate",
+    "db:seed": "npx tsx scripts/generate-seed-data.ts",
     "docker:up": "docker compose up --build",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
     "docker:sync": "docker compose exec app npm install",
-    "docker:fix-prisma": "docker compose exec app sh -c 'npx prisma generate && npx prisma db push && rm -rf .next' && docker compose restart app",
     "docker:prod": "docker compose -f docker-compose.prod.yml up --build -d",
     "docker:prod:down": "docker compose -f docker-compose.prod.yml down",
-    "docker:prod:logs": "docker compose -f docker-compose.prod.yml logs -f",
-    "docker:prod:seed": "docker compose -f docker-compose.prod.yml exec app npm run db:seed"
+    "docker:prod:logs": "docker compose -f docker-compose.prod.yml logs -f"
   },
   "dependencies": {
-    "@prisma/adapter-mariadb": "^7.8.0",
-    "@prisma/client": "^7.8.0",
     "chart.js": "^4.5.1",
     "framer-motion": "^12.40.0",
     "jose": "^6.2.3",
-    "mariadb": "^3.5.2",
+    "leaflet": "^1.9.4",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-chartjs-2": "^5.3.1",
     "react-dom": "19.2.4",
+    "react-leaflet": "^5.0.0",
     "react-pannellum": "^1.1.2-alpha.1"
   },
   "devDependencies": {
@@ -41,13 +35,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
+    "@types/leaflet": "^1.9.21",
     "eslint-config-next": "16.2.6",
-    "prisma": "^7.8.0",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5"
-  },
-  "prisma": {
-    "seed": "npx tsx prisma/seed.ts"
   }
 }

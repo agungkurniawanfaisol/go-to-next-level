@@ -1,5 +1,4 @@
-import { prisma } from "@/lib/prisma";
-import type { BarterProposalStatus } from "@prisma/client";
+import { db } from "@/lib/db";
 
 export type AppraisalSummary = {
   id: string;
@@ -18,6 +17,8 @@ export type BarterUserSummary = {
   name: string;
   email: string;
 };
+
+export type BarterProposalStatus = "PENDING" | "ACCEPTED" | "REJECTED" | "CANCELLED" | "COMPLETED";
 
 export type BarterProposalView = {
   id: string;
@@ -86,7 +87,7 @@ function mapProposal(row: ProposalRow): BarterProposalView {
     respondedAt: row.respondedAt,
     completedAt: row.completedAt,
     proposer: row.proposer,
-    recipientUser: row.requestedAppraisal.user,
+    recipientUser: (row.requestedAppraisal as any).user ?? null,
     offered: row.offeredAppraisal,
     requested: {
       id: row.requestedAppraisal.id,
@@ -104,7 +105,7 @@ function mapProposal(row: ProposalRow): BarterProposalView {
 
 const proposalInclude = {
   proposer: { select: { id: true, name: true, email: true } },
-  offeredAppraisal: { select: appraisalSelect },
+  offeredAppraisal: { select: { ...appraisalSelect } },
   requestedAppraisal: {
     select: {
       ...appraisalSelect,
@@ -117,7 +118,7 @@ export async function getUserPublishedItems(
   userId: string,
   excludeAppraisalId?: string,
 ): Promise<AppraisalSummary[]> {
-  return prisma.appraisal.findMany({
+  return db.appraisal.findMany({
     where: {
       userId,
       openForBarter: true,
@@ -131,7 +132,7 @@ export async function getUserPublishedItems(
 export async function getBarterProposalById(
   id: string,
 ): Promise<BarterProposalView | null> {
-  const row = await prisma.barterProposal.findUnique({
+  const row = db.barterProposal.findUnique({
     where: { id },
     include: proposalInclude,
   });
@@ -141,7 +142,7 @@ export async function getBarterProposalById(
 export async function getCompletedBarterProposalById(
   id: string,
 ): Promise<BarterProposalView | null> {
-  const row = await prisma.barterProposal.findUnique({
+  const row = db.barterProposal.findUnique({
     where: { id, status: "COMPLETED" },
     include: proposalInclude,
   });
@@ -152,19 +153,16 @@ export async function getCompletedBarterStats(): Promise<{
   tradeCount: number;
   memberCount: number;
 }> {
-  const completed = await prisma.barterProposal.findMany({
+  const completed = db.barterProposal.findMany({
     where: { status: "COMPLETED" },
-    select: {
-      proposerUserId: true,
-      requestedAppraisal: { select: { userId: true } },
-    },
   });
 
   const memberIds = new Set<string>();
   for (const row of completed) {
-    memberIds.add(row.proposerUserId);
-    if (row.requestedAppraisal.userId) {
-      memberIds.add(row.requestedAppraisal.userId);
+    memberIds.add(row.proposerUserId as string);
+    const requestedAppraisal = db.appraisal.findUnique({ where: { id: row.requestedAppraisalId as string } });
+    if (requestedAppraisal?.userId) {
+      memberIds.add(requestedAppraisal.userId as string);
     }
   }
 
@@ -177,19 +175,31 @@ export async function getCompletedBarterStats(): Promise<{
 export async function getUserBarterProposals(
   userId: string,
 ): Promise<{ sent: BarterProposalView[]; received: BarterProposalView[] }> {
-  const rows = await prisma.barterProposal.findMany({
+  // Get proposals where user is proposer
+  const sentRows = db.barterProposal.findMany({
     where: {
-      OR: [
-        { proposerUserId: userId },
-        { requestedAppraisal: { userId } },
-      ],
+      proposerUserId: userId,
       status: { in: ["PENDING", "ACCEPTED"] },
     },
     include: proposalInclude,
     orderBy: { createdAt: "desc" },
   });
 
-  const mapped = rows.map(mapProposal);
+  // Get proposals where user is the owner of the requested appraisal
+  const userAppraisalIds = db.appraisal
+    .findMany({ where: { userId }, select: { id: true } })
+    .map((a: any) => a.id);
+
+  const receivedRows = db.barterProposal.findMany({
+    where: {
+      requestedAppraisalId: { in: userAppraisalIds },
+      status: { in: ["PENDING", "ACCEPTED"] },
+    },
+    include: proposalInclude,
+    orderBy: { createdAt: "desc" },
+  });
+
+  const mapped = [...sentRows, ...receivedRows].map(mapProposal);
   const sent = mapped.filter((p) => p.proposer.id === userId);
   const received = mapped.filter(
     (p) =>
@@ -202,7 +212,7 @@ export async function getUserBarterProposals(
 export async function getCompletedBarterProposals(
   limit = 50,
 ): Promise<BarterProposalView[]> {
-  const rows = await prisma.barterProposal.findMany({
+  const rows = db.barterProposal.findMany({
     where: { status: "COMPLETED" },
     include: proposalInclude,
     orderBy: { completedAt: "desc" },
@@ -214,12 +224,12 @@ export async function getCompletedBarterProposals(
 export async function getAdminBarterProposals(
   statusFilter: "active" | "completed",
 ): Promise<BarterProposalView[]> {
-  const status: BarterProposalStatus[] =
+  const status =
     statusFilter === "completed"
       ? ["COMPLETED"]
       : ["PENDING", "ACCEPTED"];
 
-  const rows = await prisma.barterProposal.findMany({
+  const rows = db.barterProposal.findMany({
     where: { status: { in: status } },
     include: proposalInclude,
     orderBy: { createdAt: "desc" },
@@ -234,10 +244,8 @@ export async function getAdminBarterProposalStats(): Promise<{
   accepted: number;
   completed: number;
 }> {
-  const [pending, accepted, completed] = await Promise.all([
-    prisma.barterProposal.count({ where: { status: "PENDING" } }),
-    prisma.barterProposal.count({ where: { status: "ACCEPTED" } }),
-    prisma.barterProposal.count({ where: { status: "COMPLETED" } }),
-  ]);
+  const pending = db.barterProposal.count({ where: { status: "PENDING" } });
+  const accepted = db.barterProposal.count({ where: { status: "ACCEPTED" } });
+  const completed = db.barterProposal.count({ where: { status: "COMPLETED" } });
   return { pending, accepted, completed };
 }
