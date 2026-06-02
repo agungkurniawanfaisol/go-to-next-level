@@ -139,7 +139,7 @@ export function BarterProposalForm({
       </div>
 
       {/* Konten utama — lebar penuh */}
-      <div className="flex flex-1 flex-col py-8 lg:py-10">
+      <div className="flex flex-1 flex-col py-8 pb-28 lg:py-10 lg:pb-32">
         <AnimatePresence mode="wait">
           {step === "review" && (
             <motion.div
@@ -441,7 +441,7 @@ export function BarterProposalForm({
 
       {/* Footer aksi — sticky */}
       {step !== "submitting" && (
-        <div className="sticky bottom-0 -mx-6 border-t border-ink/8 bg-ivory/95 px-6 py-5 backdrop-blur-md dark:bg-[var(--bg-primary)]/95 lg:-mx-8 lg:px-8">
+        <div className="sticky bottom-0 z-20 -mx-6 border-t border-ink/8 bg-ivory/95 px-6 py-5 backdrop-blur-md dark:bg-[var(--bg-primary)]/95 lg:-mx-8 lg:px-8">
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
             {step === "review" ? (
               <Link

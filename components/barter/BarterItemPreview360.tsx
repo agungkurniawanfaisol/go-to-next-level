@@ -24,7 +24,7 @@ export function BarterItemPreview360({
         imageSrc={imageSrc}
         className="min-h-[200px] w-full sm:min-h-[240px]"
       />
-      <span className="pointer-events-none absolute bottom-2 right-2 z-10 rounded-full border border-white/40 bg-forest/50 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-sm">
+      <span className="pointer-events-none absolute right-2 top-2 z-10 rounded-full border border-white/40 bg-forest/55 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-sm">
         360°
       </span>
       <p className="sr-only">Preview 360°: {title}</p>

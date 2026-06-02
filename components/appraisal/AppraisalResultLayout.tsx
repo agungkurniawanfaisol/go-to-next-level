@@ -6,6 +6,7 @@ import { CNNPipelinePanel } from "@/components/ai-appraisal/CNNPipelinePanel";
 import { PannellumViewer360 } from "@/components/appraisal/PannellumViewer360";
 import { PreviewGuidePanel } from "@/components/appraisal/PreviewGuidePanel";
 import { EcoSwapPointsDisplay } from "@/components/ai-appraisal/EcoSwapPointsDisplay";
+import { PointsTransparencyPanel } from "@/components/ai-appraisal/PointsTransparencyPanel";
 import { PublishBarterForm } from "@/components/barter/PublishBarterForm";
 
 import type { AppraisalResultData } from "@/lib/appraisal-mock";
@@ -81,6 +82,12 @@ export function AppraisalResultLayout({
 
       <aside className="flex flex-col gap-4 lg:col-span-1 lg:sticky lg:top-24">
         <EcoSwapPointsDisplay points={result.ecoSwapPoints} size="lg" />
+        <PointsTransparencyPanel
+          confidenceScore={result.confidenceScore}
+          roleClassification={result.roleClassification}
+          conditionAnalysis={result.conditionAnalysis}
+          ecoSwapPoints={result.ecoSwapPoints}
+        />
         <CNNPipelinePanel mode="complete" compact />
         <PreviewGuidePanel mode="result" viewerReady={viewerReady} />
       </aside>
