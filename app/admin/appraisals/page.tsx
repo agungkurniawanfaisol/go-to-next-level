@@ -4,8 +4,9 @@ import Link from "next/link";
 import { AdminTopBar } from "@/components/admin/AdminTopBar";
 import { getAppraisalLogs } from "@/lib/api/appraisals";
 
-function formatDate(d: Date): string {
-  return d.toLocaleDateString("id-ID", {
+function formatDate(d: Date | string): string {
+  const date = typeof d === "string" ? new Date(d) : d;
+  return date.toLocaleDateString("id-ID", {
     day: "2-digit",
     month: "short",
     year: "numeric",

@@ -241,7 +241,7 @@ export function BarterGrid({ listings }: BarterGridProps) {
       </div>
 
       {/* Filters row: category dropdown + sort buttons */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="relative z-10 flex flex-wrap items-center gap-3">
         {/* Category dropdown */}
         <select
           value={category}

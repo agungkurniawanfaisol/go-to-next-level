@@ -8,9 +8,9 @@ type CompletedBarterCardProps = {
   proposal: BarterProposalView;
 };
 
-function formatDate(d: Date | null): string {
+function formatDate(d: Date | string | null): string {
   if (!d) return "—";
-  return formatDateId(d);
+  return formatDateId(typeof d === "string" ? new Date(d) : d);
 }
 
 export function CompletedBarterCard({ proposal }: CompletedBarterCardProps) {
@@ -22,7 +22,7 @@ export function CompletedBarterCard({ proposal }: CompletedBarterCardProps) {
             Barter selesai
           </span>
           <time
-            dateTime={proposal.completedAt?.toISOString()}
+            dateTime={typeof proposal.completedAt === "string" ? proposal.completedAt : proposal.completedAt?.toISOString()}
             className="text-xs text-ink/50"
           >
             {formatDate(proposal.completedAt)}

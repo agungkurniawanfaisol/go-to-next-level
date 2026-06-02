@@ -17,7 +17,7 @@ export function CounterfactualSection({ metrics }: CounterfactualSectionProps) {
       eyebrow="Counterfactual"
       title="Jika Tanpa EcoSwap"
       description="Panel ini membantu juri melihat skenario pembanding ketika platform ini tidak ada."
-      className="bg-gradient-to-b from-ivory via-gold/5 to-ivory"
+      className="bg-gradient-to-b from-ivory via-gold/5 to-ivory dark:from-[#0f0e0c] dark:via-[#b8860b]/8 dark:to-[#0f0e0c]"
     >
       <div className="grid gap-5 md:grid-cols-2">
         <article className="rounded-2xl border border-red-200/60 bg-red-50/70 p-6">

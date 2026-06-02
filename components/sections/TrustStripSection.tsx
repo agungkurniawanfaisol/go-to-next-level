@@ -22,7 +22,7 @@ export function TrustStripSection() {
       eyebrow="Trust & Validity"
       title="Alasan Sistem Ini Layak Dipercaya"
       description="EcoSwap dibangun agar keputusan AI, alur barter, dan dampak bisa diverifikasi langsung oleh juri."
-      className="bg-gradient-to-b from-cream-muted/40 via-ivory to-ivory"
+      className="bg-gradient-to-b from-cream-muted/40 via-ivory to-ivory dark:from-[#1a1714] dark:via-[#0f0e0c] dark:to-[#0f0e0c]"
     >
       <div className="grid gap-4 md:grid-cols-3">
         {trustItems.map((item) => (

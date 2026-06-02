@@ -130,7 +130,7 @@ export function ImpactCounterSection({ metrics }: ImpactCounterSectionProps) {
       eyebrow="WOW Impact"
       title="Dampak Nyata EcoSwap"
       description="Angka ini naik seiring aktivitas komunitas: upload, appraisal, barter, dan penyelesaian transaksi."
-      className="bg-gradient-to-b from-ivory via-cream-muted/50 to-ivory"
+      className="bg-gradient-to-b from-ivory via-cream-muted/50 to-ivory dark:from-[#0f0e0c] dark:via-[#1a1714] dark:to-[#0f0e0c]"
     >
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((card) => (

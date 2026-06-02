@@ -37,7 +37,7 @@ export function PersonaSwitcherSection() {
       eyebrow="Demo Persona"
       title="Pilih Sudut Pandang Demo"
       description="Satu klik untuk lompat ke bagian yang paling relevan sesuai peran audiens."
-      className="bg-gradient-to-b from-ivory via-forest/5 to-ivory"
+      className="bg-gradient-to-b from-ivory via-forest/5 to-ivory dark:from-[#0f0e0c] dark:via-[#1f3d32]/8 dark:to-[#0f0e0c]"
     >
       <div className="grid gap-4 md:grid-cols-3">
         {personas.map((persona) => (
