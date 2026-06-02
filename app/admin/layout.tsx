@@ -30,7 +30,7 @@ export default async function AdminLayout({
 
   return (
     <AuthProvider user={user}>
-      <div className="min-h-screen bg-ivory">
+      <div className="min-h-screen bg-ivory dark:bg-[#0f0e0c]">
         <AdminSidebar />
         <div className="flex min-h-screen min-w-0 flex-col pt-16 lg:ml-64 lg:pt-0">
           <PageTransition className="flex min-h-screen min-w-0 flex-1 flex-col">

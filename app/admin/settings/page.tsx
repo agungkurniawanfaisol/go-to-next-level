@@ -7,7 +7,7 @@ export default function AdminSettingsPage() {
         title="Pengaturan"
         description="Konfigurasi model CNN & platform (demo)"
       />
-      <div className="max-w-xl space-y-6 p-6 lg:p-8">
+      <div className="max-w-xl space-y-6 p-6 lg:p-8 dark:text-[#f0ebe3]">
         <fieldset className="glass-panel rounded-2xl border border-ink/8 bg-surface/80 p-5">
           <legend className="px-2 text-sm font-semibold text-ink">
             Model CNN

@@ -18,7 +18,7 @@ export default async function AdminUsersPage() {
   return (
     <>
       <AdminTopBar title="Pengguna" description="Manajemen akun komunitas" />
-      <div className="space-y-3 p-6 lg:p-8">
+      <div className="space-y-3 p-6 lg:p-8 dark:text-[#f0ebe3]">
         {users.length > 0 ? (
           users.map((user) => (
             <div

@@ -46,7 +46,7 @@ export default async function AdminDashboardPage() {
         title="Dashboard"
         description="Ringkasan aktivitas AI appraisal & ekonomi sirkular"
       />
-      <div className="flex-1 space-y-8 p-6 lg:p-8">
+      <div className="flex-1 space-y-8 p-6 lg:p-8 dark:text-[#f0ebe3]">
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {statCards.map((stat) => (
             <article

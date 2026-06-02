@@ -40,7 +40,7 @@ export function HeritageDetailClient({ item }: { item: HeritageDetail }) {
 
   return (
     <>
-      <div className="p-6 lg:p-8">
+      <div className="p-6 lg:p-8 dark:text-[#f0ebe3]">
         {/* Breadcrumb + actions */}
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <nav className="flex items-center gap-2 text-sm text-ink/50">

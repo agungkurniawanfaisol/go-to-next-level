@@ -226,7 +226,7 @@ export function HeritagePageClient({ items }: HeritagePageClientProps) {
 
   return (
     <>
-      <div className="p-6 lg:p-8">
+      <div className="p-6 lg:p-8 dark:text-[#f0ebe3]">
         {/* Toolbar: filters + add button */}
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <HeritageFilters filters={filters} onChange={setFilters} />

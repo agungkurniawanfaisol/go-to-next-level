@@ -44,7 +44,7 @@ export function AdminTopBar({ title, description }: AdminTopBarProps) {
   };
 
   return (
-    <header className="sticky top-16 z-20 flex shrink-0 flex-wrap items-center justify-between gap-4 border-b border-ink/8 bg-ivory/95 px-6 py-5 backdrop-blur-md lg:top-0 lg:px-8">
+    <header className="sticky top-16 z-20 flex shrink-0 flex-wrap items-center justify-between gap-4 border-b border-ink/8 bg-ivory/95 px-6 py-5 backdrop-blur-md lg:top-0 lg:px-8 dark:bg-[#0f0e0c]/95">
       <div>
         <h1 className="text-xl font-bold text-ink md:text-2xl">{title}</h1>
         {description && (
