@@ -13,7 +13,7 @@ export function ShowcaseCasesSection({ cases }: ShowcaseCasesSectionProps) {
       eyebrow="3 Kasus Nyata"
       title="Outcome yang Bisa Dilihat Juri"
       description="Contoh barter yang sudah selesai lengkap dengan poin dan hasil akhirnya."
-      className="bg-gradient-to-b from-ivory via-forest/5 to-ivory"
+      className="bg-gradient-to-b from-ivory via-forest/5 to-ivory dark:from-[#0f0e0c] dark:via-[#1f3d32]/8 dark:to-[#0f0e0c]"
     >
       {cases.length > 0 ? (
         <div className="grid gap-5 md:grid-cols-3">

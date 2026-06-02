@@ -13,7 +13,7 @@ export function ImpactTimelineSection({ events }: ImpactTimelineSectionProps) {
       eyebrow="Live Timeline"
       title="Aktivitas EcoSwap Hari Ini"
       description="Feed aktivitas terbaru untuk menunjukkan bahwa platform benar-benar aktif dan berjalan."
-      className="bg-gradient-to-b from-ivory via-emerald/5 to-ivory"
+      className="bg-gradient-to-b from-ivory via-emerald/5 to-ivory dark:from-[#0f0e0c] dark:via-[#0f6b56]/8 dark:to-[#0f0e0c]"
     >
       <div className="rounded-2xl border border-ink/8 bg-surface/90 p-5 shadow-card sm:p-6">
         {events.length > 0 ? (

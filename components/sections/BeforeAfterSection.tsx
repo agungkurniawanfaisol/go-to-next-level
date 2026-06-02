@@ -25,7 +25,7 @@ export function BeforeAfterSection() {
       eyebrow="Before vs After"
       title="Apa yang Berubah dengan EcoSwap"
       description="Visual cepat untuk menunjukkan perbedaan kondisi sebelum dan sesudah sistem dipakai."
-      className="bg-gradient-to-b from-ivory via-cream-muted/40 to-ivory"
+      className="bg-gradient-to-b from-ivory via-cream-muted/40 to-ivory dark:from-[#0f0e0c] dark:via-[#1a1714] dark:to-[#0f0e0c]"
     >
       <div className="rounded-2xl border border-ink/8 bg-surface/80 p-5 shadow-card sm:p-6">
         <div className="relative overflow-hidden rounded-xl border border-ink/10">

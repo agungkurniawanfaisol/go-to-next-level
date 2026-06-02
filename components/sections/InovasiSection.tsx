@@ -43,7 +43,7 @@ export function InovasiSection() {
       eyebrow="Keunikan Platform"
       title="Inovasi yang Membedakan EcoSwap"
       description="Bukan sekadar landing page — aplikasi ini membuktikan alur AI end-to-end yang bisa diverifikasi juri secara langsung."
-      className="relative overflow-hidden bg-gradient-to-b from-forest/6 via-ivory to-ivory"
+      className="relative overflow-hidden bg-gradient-to-b from-forest/6 via-ivory to-ivory dark:from-[#1f3d32]/10 dark:via-[#0f0e0c] dark:to-[#0f0e0c]"
     >
       <div
         aria-hidden

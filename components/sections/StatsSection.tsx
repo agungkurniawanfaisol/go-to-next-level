@@ -111,7 +111,7 @@ export function StatsSection() {
       eyebrow="Live Stats"
       title="Dampak Komunitas EcoSwap"
       description="Data real-time dari aktivitas appraisal, swap, dan pelestarian heritage oleh komunitas."
-      className="relative overflow-hidden bg-gradient-to-b from-ivory via-cream-muted/50 to-ivory"
+      className="relative overflow-hidden bg-gradient-to-b from-ivory via-cream-muted/50 to-ivory dark:from-[#0f0e0c] dark:via-[#1a1714] dark:to-[#0f0e0c]"
     >
       <div
         aria-hidden
