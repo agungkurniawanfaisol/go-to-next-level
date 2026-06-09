@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 
 export function Hero() {
@@ -132,13 +133,14 @@ export function Hero() {
                     </svg>
 
                     {/* Centered item display */}
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
                       <div className="text-center">
-                        <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border-2 border-gold/25 bg-surface/70 shadow-card backdrop-blur-sm">
-                          <svg className="h-12 w-12 text-gold/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c-4 0-7 2.5-7 6.5S8 16 12 21c4-5 7-7.5 7-11.5S16 3 12 3z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v8M8 12h8" />
-                          </svg>
+                        <div className="mx-auto flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border-4 border-gold shadow-card">
+                          <img
+                            src="assets/images(1).jpg"
+                            alt=""
+                            className="h-full w-full object-cover"
+                          />
                         </div>
                         <p className="mt-2 font-display text-lg font-semibold text-forest">
                           Batik Tulis

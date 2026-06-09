@@ -68,10 +68,13 @@ function HeritagePreview({ phase }: { phase: Phase }) {
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border-2 border-gold/30 bg-surface/70 shadow-card backdrop-blur-sm"
         >
-          <svg className="h-14 w-14 text-gold/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c-4 0-7 2.5-7 6.5S8 16 12 21c4-5 7-7.5 7-11.5S16 3 12 3z" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v8M8 12h8" />
-          </svg>
+          <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-4 border-gold">
+            <img
+              src="assets/images(1).jpg"
+              alt="Item"
+              className="h-full w-full object-cover"
+            />
+          </div>
         </motion.div>
 
         <motion.p
