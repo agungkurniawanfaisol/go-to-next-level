@@ -18,9 +18,25 @@ function isHighHeritage(role: string): boolean {
 }
 
 export function BarterItemCard({ listing }: BarterItemCardProps) {
-  const imageSrc =
-    listing.imagePath ??
-    "https://placehold.co/800x600/e8e2d8/1f3d32?text=EcoSwap";
+  const imageSources = [
+    "/assets/gambar_keris.png",
+    "/assets/gambar_gamelan.png",
+    "/assets/gambar_wayang.png",
+    "/assets/gambar_wayang_2.png",
+    "/assets/gambar_angklung.png",
+  ] as const;
+  const imageLabels: Record<typeof imageSources[number], string> = {
+    "/assets/gambar_keris.png": "Keris",
+    "/assets/gambar_gamelan.png": "Gamelan",
+    "/assets/gambar_wayang.png": "Wayang",
+    "/assets/gambar_wayang_2.png": "Wayang Semar",
+    "/assets/gambar_angklung.png": "Angklung",
+  };
+  const imageIndex = Math.abs(
+    Array.from(String(listing.id)).reduce((sum, char) => sum + char.charCodeAt(0), 0),
+  ) % imageSources.length;
+  const imageSrc = imageSources[imageIndex];
+  const displayName = imageLabels[imageSrc] ?? listing.detectedObject;
 
   return (
     <Link href={`/barter/${listing.id}`} className="group block">
@@ -29,7 +45,9 @@ export function BarterItemCard({ listing }: BarterItemCardProps) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imageSrc}
-            alt={listing.detectedObject}
+            alt={
+              displayName
+            }
             loading="lazy"
             decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -53,7 +71,7 @@ export function BarterItemCard({ listing }: BarterItemCardProps) {
 
         <div className="p-5">
           <h3 className="font-display line-clamp-2 text-lg font-semibold text-ink transition-colors group-hover:text-forest">
-            {listing.detectedObject}
+            {displayName}
           </h3>
 
           <div className="mt-3 flex items-center gap-2">

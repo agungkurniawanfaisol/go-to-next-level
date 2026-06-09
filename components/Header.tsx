@@ -55,15 +55,12 @@ const navTree: NavEntry[] = [
 
 function EcoSwapIcon() {
   return (
-    <div
-      aria-hidden
-      className="h-5 w-5 text-gold"
-      // viewBox="0 0 24 24"
-      // fill="none"
-      // stroke="currentColor"
-      // strokeWidth="1.5"
-    >
-      <img src="assets/logo.png"/>
+    <div className="h-8 w-8 overflow-hidden rounded-full">
+      <img
+        src="/assets/logo.png"
+        alt="EcoSwap logo"
+        className="h-full w-full object-contain"
+      />
     </div>
   );
 }

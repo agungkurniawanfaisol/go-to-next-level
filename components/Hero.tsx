@@ -137,7 +137,7 @@ export function Hero() {
                       <div className="text-center">
                         <div className="mx-auto flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border-4 border-gold shadow-card">
                           <img
-                            src="assets/images(1).jpg"
+                            src="/assets/images(1).jpg"
                             alt=""
                             className="h-full w-full object-cover"
                           />

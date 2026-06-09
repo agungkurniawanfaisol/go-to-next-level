@@ -70,7 +70,7 @@ function HeritagePreview({ phase }: { phase: Phase }) {
         >
           <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-4 border-gold">
             <img
-              src="assets/images(1).jpg"
+              src="/assets/images(1).jpg"
               alt="Item"
               className="h-full w-full object-cover"
             />
