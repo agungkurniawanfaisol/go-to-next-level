@@ -48,6 +48,7 @@ export function BarterDetailView({
       ? listing.swapDescription.slice(0, 120) + "…"
       : listing.swapDescription
     : null;
+  const ceritaId = "cerita-barang";
 
   return (
     <div className="flex flex-col gap-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
@@ -105,7 +106,15 @@ export function BarterDetailView({
             {displayName}
           </h2>
           {ceritaExcerpt && (
-            <p className="mt-2 text-sm text-ink/65">{ceritaExcerpt}</p>
+            <>
+              <p className="mt-2 text-sm text-ink/65">{ceritaExcerpt}</p>
+              <a
+                href={`#${ceritaId}`}
+                className="mt-3 inline-block text-sm font-semibold text-forest hover:text-emerald"
+              >
+                Baca Cerita Barang
+              </a>
+            </>
           )}
           <div className="mt-4 space-y-2 text-sm">
             <p>
@@ -186,7 +195,7 @@ export function BarterDetailView({
         </p>
 
         {listing.swapDescription && (
-          <div className="glass-panel mt-6 rounded-2xl p-6">
+          <div id={ceritaId} className="glass-panel mt-6 rounded-2xl p-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-forest">
               Cerita Barang
             </p>
