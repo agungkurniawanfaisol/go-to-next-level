@@ -1,0 +1,21 @@
+# Production: docker compose -f docker-compose.prod.yml up --build -d
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ecoswap-app:prod
+    container_name: ecoswap-app-prod
+    ports:
+      - "${APP_PORT:-80}:5173"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      JWT_SECRET: ${JWT_SECRET:-ecoswap-change-me-in-production}
+    restart: unless-stopped
+    volumes:
+      - appraisal_uploads:/app/public/uploads
+
+volumes:
+  appraisal_uploads:

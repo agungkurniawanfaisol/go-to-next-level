@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: ecoswap-app
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+      PORT: "5173"
+      WATCHPACK_POLLING: "true"
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+      - appraisal_uploads:/app/public/uploads
+    command: sh -c "npm install && npm run dev:docker"
+    restart: unless-stopped
+
+volumes:
+  node_modules:
+  appraisal_uploads:

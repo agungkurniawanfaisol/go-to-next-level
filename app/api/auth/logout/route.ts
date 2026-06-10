@@ -1,0 +1,11 @@
+import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+
+const COOKIE_NAME = "ecoswap-session";
+
+export async function POST(request: NextRequest) {
+  const cookieStore = await cookies();
+  cookieStore.delete(COOKIE_NAME);
+
+  return NextResponse.redirect(new URL("/", request.url));
+}

@@ -1,0 +1,309 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  /* Premium Light Luxe */
+  --color-ivory: #faf8f4;
+  --color-surface: #ffffff;
+  --color-ink: #1a1410;
+  --color-forest: #1f3d32;
+  --color-forest-light: #2d5a4a;
+  --color-emerald: #0f6b56;
+  --color-emerald-light: #1a8a72;
+  --color-gold: #b8860b;
+  --color-gold-light: #e8d5a3;
+
+  /* Backward-compatible aliases */
+  --color-sage: #1f3d32;
+  --color-sage-light: #2d5a4a;
+  --color-earth: #1a1410;
+  --color-earth-dark: #1a1410;
+  --color-cream: #faf8f4;
+  --color-cream-muted: #f0ebe3;
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+
+  --shadow-card: 0 4px 24px rgba(26, 20, 16, 0.08), 0 1px 3px rgba(26, 20, 16, 0.04);
+  --shadow-elevated: 0 12px 40px rgba(26, 20, 16, 0.12), 0 4px 12px rgba(26, 20, 16, 0.06);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease forwards;
+  opacity: 0;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+.dark body,
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* ─── Smooth dark mode transition ────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  *,
+  *::before,
+  *::after {
+    transition: background-color 0.35s ease,
+                color 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+  }
+}
+
+/* ─── Dark Mode ──────────────────────────────────────────────────── */
+
+/* Default: light mode. Toggle .dark on <html> via JS. */
+:root,
+.light {
+  --bg-primary: #faf8f4;
+  --bg-surface: #ffffff;
+  --text-primary: #1a1410;
+  --text-soft: rgba(26, 20, 16, 0.65);
+  --border-soft: rgba(26, 20, 16, 0.08);
+  --bg-page-extra: radial-gradient(ellipse 80% 50% at 100% 0%, rgba(15, 107, 86, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(31, 61, 50, 0.05) 0%, transparent 45%);
+  --glass-bg: rgba(255, 255, 255, 0.82);
+}
+
+.dark {
+  --bg-primary: #0f0e0c;
+  --bg-surface: #1a1714;
+  --text-primary: #f0ebe3;
+  --text-soft: rgba(240, 235, 227, 0.6);
+  --border-soft: rgba(240, 235, 227, 0.1);
+  --bg-page-extra: radial-gradient(ellipse 80% 50% at 100% 0%, rgba(15, 107, 86, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(31, 61, 50, 0.10) 0%, transparent 45%);
+  --glass-bg: rgba(15, 14, 12, 0.85);
+}
+
+.dark body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.dark .glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border-color: rgba(240, 235, 227, 0.1);
+}
+
+.dark .bg-page {
+  background-color: var(--bg-primary);
+  background-image: var(--bg-page-extra);
+}
+
+.dark .bg-surface {
+  background-color: var(--bg-surface);
+}
+
+.dark .bg-surface\/80 {
+  background-color: color-mix(in srgb, var(--bg-surface) 80%, transparent);
+}
+
+.dark .bg-ivory {
+  background-color: var(--bg-primary);
+}
+.dark .bg-ivory\/60 { background-color: color-mix(in srgb, var(--bg-primary) 60%, transparent); }
+.dark .bg-ivory\/80 { background-color: color-mix(in srgb, var(--bg-primary) 80%, transparent); }
+.dark .bg-ivory\/90 { background-color: color-mix(in srgb, var(--bg-primary) 90%, transparent); }
+.dark .bg-ivory\/95 { background-color: color-mix(in srgb, var(--bg-primary) 95%, transparent); }
+
+.dark .bg-surface { background-color: var(--bg-surface); }
+.dark .bg-surface\/60 { background-color: color-mix(in srgb, var(--bg-surface) 60%, transparent); }
+.dark .bg-surface\/70 { background-color: color-mix(in srgb, var(--bg-surface) 70%, transparent); }
+.dark .bg-surface\/80 { background-color: color-mix(in srgb, var(--bg-surface) 80%, transparent); }
+.dark .bg-surface\/90 { background-color: color-mix(in srgb, var(--bg-surface) 90%, transparent); }
+
+.dark .bg-ink\/5 { background-color: rgba(240, 235, 227, 0.05); }
+.dark .bg-ink\/6 { background-color: rgba(240, 235, 227, 0.06); }
+.dark .bg-ink\/8 { background-color: rgba(240, 235, 227, 0.08); }
+.dark .bg-ink\/10 { background-color: rgba(240, 235, 227, 0.10); }
+.dark .bg-ink\/12 { background-color: rgba(240, 235, 227, 0.12); }
+.dark .bg-ink\/15 { background-color: rgba(240, 235, 227, 0.15); }
+.dark .bg-ink\/20 { background-color: rgba(240, 235, 227, 0.20); }
+
+.dark .hover\:bg-ink\/\[0\.04\]:hover { background-color: rgba(240, 235, 227, 0.04); }
+.dark .hover\:bg-forest\/5:hover { background-color: color-mix(in srgb, #2d5a4a 5%, transparent); }
+
+.dark .divide-ink\/6 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(240, 235, 227, 0.06);
+}
+
+.dark .text-ink { color: var(--text-primary); }
+.dark .text-ink\/35 { color: rgba(240, 235, 227, 0.35); }
+.dark .text-ink\/40 { color: rgba(240, 235, 227, 0.40); }
+.dark .text-ink\/45 { color: rgba(240, 235, 227, 0.45); }
+.dark .text-ink\/50 { color: rgba(240, 235, 227, 0.50); }
+.dark .text-ink\/55 { color: rgba(240, 235, 227, 0.55); }
+.dark .text-ink\/60 { color: rgba(240, 235, 227, 0.60); }
+.dark .text-ink\/65 { color: rgba(240, 235, 227, 0.65); }
+.dark .text-ink\/70 { color: rgba(240, 235, 227, 0.70); }
+.dark .text-ink\/75 { color: rgba(240, 235, 227, 0.75); }
+.dark .text-ink\/80 { color: rgba(240, 235, 227, 0.80); }
+
+.dark .text-forest { color: #4a8a6e; }
+.dark .text-emerald { color: #1a9a7e; }
+.dark .text-gold { color: #d4a81e; }
+.dark .text-gold-light { color: #e8d5a3; }
+
+.dark input,
+.dark input::placeholder {
+  color: var(--text-primary);
+}
+.dark input::placeholder {
+  opacity: 0.45;
+}
+
+/* Border overrides */
+.dark .border-ink\/5,
+.dark .border-ink\/6,
+.dark .border-ink\/8,
+.dark .border-ink\/10,
+.dark .border-ink\/12,
+.dark .border-ink\/15,
+.dark .border-ink\/20 {
+  border-color: var(--border-soft);
+}
+
+.dark .border-gold\/15 { border-color: rgba(212, 168, 30, 0.15); }
+.dark .border-gold\/20 { border-color: rgba(212, 168, 30, 0.20); }
+.dark .border-gold\/25 { border-color: rgba(212, 168, 30, 0.25); }
+.dark .border-gold\/30 { border-color: rgba(212, 168, 30, 0.30); }
+.dark .border-gold\/35 { border-color: rgba(212, 168, 30, 0.35); }
+.dark .border-gold\/40 { border-color: rgba(212, 168, 30, 0.40); }
+.dark .border-gold\/45 { border-color: rgba(212, 168, 30, 0.45); }
+.dark .border-gold\/50 { border-color: rgba(212, 168, 30, 0.50); }
+.dark .border-gold\/55 { border-color: rgba(212, 168, 30, 0.55); }
+
+.dark .border-emerald\/15 { border-color: rgba(26, 154, 126, 0.15); }
+.dark .border-emerald\/20 { border-color: rgba(26, 154, 126, 0.20); }
+.dark .border-emerald\/25 { border-color: rgba(26, 154, 126, 0.25); }
+.dark .border-emerald\/30 { border-color: rgba(26, 154, 126, 0.30); }
+.dark .border-emerald\/40 { border-color: rgba(26, 154, 126, 0.40); }
+.dark .border-emerald\/50 { border-color: rgba(26, 154, 126, 0.50); }
+
+.dark .border-forest\/15 { border-color: rgba(45, 90, 74, 0.15); }
+.dark .border-forest\/20 { border-color: rgba(45, 90, 74, 0.20); }
+.dark .border-forest\/25 { border-color: rgba(45, 90, 74, 0.25); }
+.dark .border-forest\/30 { border-color: rgba(45, 90, 74, 0.30); }
+
+/* Accent backgrounds with brighter colors for dark mode */
+.dark .bg-forest { background-color: #2d5a4a; }
+.dark .bg-forest\/5 { background-color: color-mix(in srgb, #2d5a4a 5%, transparent); }
+.dark .bg-forest\/8 { background-color: color-mix(in srgb, #2d5a4a 8%, transparent); }
+.dark .bg-forest\/10 { background-color: color-mix(in srgb, #2d5a4a 10%, transparent); }
+.dark .bg-forest\/12 { background-color: color-mix(in srgb, #2d5a4a 12%, transparent); }
+.dark .bg-forest\/15 { background-color: color-mix(in srgb, #2d5a4a 15%, transparent); }
+.dark .bg-forest\/20 { background-color: color-mix(in srgb, #2d5a4a 20%, transparent); }
+.dark .bg-forest\/25 { background-color: color-mix(in srgb, #2d5a4a 25%, transparent); }
+
+.dark .bg-emerald { background-color: #1a9a7e; }
+.dark .bg-emerald-light { background-color: #2ab08e; }
+.dark .text-emerald-light { color: #2ab08e; }
+.dark .bg-emerald\/8 { background-color: color-mix(in srgb, #1a9a7e 8%, transparent); }
+.dark .bg-emerald\/10 { background-color: color-mix(in srgb, #1a9a7e 10%, transparent); }
+.dark .bg-emerald\/12 { background-color: color-mix(in srgb, #1a9a7e 12%, transparent); }
+.dark .bg-emerald\/15 { background-color: color-mix(in srgb, #1a9a7e 15%, transparent); }
+.dark .bg-emerald\/20 { background-color: color-mix(in srgb, #1a9a7e 20%, transparent); }
+
+.dark .bg-gold { background-color: #c4981a; }
+.dark .bg-gold\/8 { background-color: color-mix(in srgb, #d4a81e 8%, transparent); }
+
+/* Gradient via colors */
+.dark .via-surface { --tw-gradient-via: var(--bg-surface) !important; }
+.dark .via-ivory { --tw-gradient-via: var(--bg-primary) !important; }
+.dark .bg-gold\/10 { background-color: color-mix(in srgb, #d4a81e 10%, transparent); }
+.dark .bg-gold\/12 { background-color: color-mix(in srgb, #d4a81e 12%, transparent); }
+.dark .bg-gold\/15 { background-color: color-mix(in srgb, #d4a81e 15%, transparent); }
+.dark .bg-gold\/20 { background-color: color-mix(in srgb, #d4a81e 20%, transparent); }
+.dark .bg-gold\/25 { background-color: color-mix(in srgb, #d4a81e 25%, transparent); }
+.dark .bg-gold\/30 { background-color: color-mix(in srgb, #d4a81e 30%, transparent); }
+.dark .from-gold\/25 { --tw-gradient-from: color-mix(in srgb, #d4a81e 25%, transparent); }
+.dark .from-gold\/30 { --tw-gradient-from: color-mix(in srgb, #d4a81e 30%, transparent); }
+.dark .to-gold\/15 { --tw-gradient-to: color-mix(in srgb, #d4a81e 15%, transparent); }
+.dark .hover\:from-gold\/18:hover { --tw-gradient-from: color-mix(in srgb, #d4a81e 18%, transparent); }
+.dark .hover\:bg-gold\/18:hover { background-color: color-mix(in srgb, #d4a81e 18%, transparent); }
+.dark .text-gold-light\/80 { color: color-mix(in srgb, #e8d5a3 80%, transparent); }
+
+/* Hero and other sections */
+.dark .bg-cream-muted,
+.dark .bg-cream-muted\/40,
+.dark .bg-cream-muted\/50 {
+  background-color: var(--bg-surface);
+}
+
+.bg-page {
+  background-color: var(--color-ivory);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 100% 0%, rgba(15, 107, 86, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(31, 61, 50, 0.05) 0%, transparent 45%);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(26, 20, 16, 0.08);
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-elevated {
+  box-shadow: var(--shadow-elevated);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #b8860b 0%, #e8d5a3 50%, #b8860b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ai-accent-bar {
+  background: linear-gradient(90deg, var(--color-forest) 0%, var(--color-emerald) 100%);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.hero-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
