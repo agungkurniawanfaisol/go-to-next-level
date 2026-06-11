@@ -13,13 +13,38 @@ type PageProps = {
   params: Promise<{ id: string }>;
 };
 
+const imageSources = [
+  "/assets/gambar_keris.png",
+  "/assets/gambar_gamelan.png",
+  "/assets/gambar_wayang.png",
+  "/assets/gambar_wayang_2.png",
+  "/assets/gambar_angklung.png",
+] as const;
+
+const imageLabels: Record<typeof imageSources[number], string> = {
+  "/assets/gambar_keris.png": "Keris",
+  "/assets/gambar_gamelan.png": "Gamelan",
+  "/assets/gambar_wayang.png": "Wayang",
+  "/assets/gambar_wayang_2.png": "Wayang Semar",
+  "/assets/gambar_angklung.png": "Angklung",
+};
+
+function getDisplayName(id: string, fallback: string) {
+  const imageIndex = Math.abs(
+    Array.from(String(id)).reduce((sum, char) => sum + char.charCodeAt(0), 0),
+  ) % imageSources.length;
+
+  return imageLabels[imageSources[imageIndex]] ?? fallback;
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const listing = await getBarterListingById(id);
   if (!listing) return { title: "Barang tidak ditemukan — EcoSwap" };
+  const displayName = getDisplayName(listing.id, listing.detectedObject);
   return {
-    title: `${listing.detectedObject} — List Barter EcoSwap`,
-    description: listing.swapDescription ?? `Barter ${listing.detectedObject}`,
+    title: `${displayName} — List Barter EcoSwap`,
+    description: listing.swapDescription ?? `Barter ${displayName}`,
   };
 }
 
@@ -35,6 +60,7 @@ export default async function BarterDetailPage({ params }: PageProps) {
 
   const isLoggedIn = !!session && !!validUserId;
   const isOwnListing = isLoggedIn && listing.userId === validUserId;
+  const displayName = getDisplayName(listing.id, listing.detectedObject);
   const myItems =
     isLoggedIn && !isOwnListing
       ? await getUserPublishedItems(validUserId!, listing.id)
@@ -50,7 +76,7 @@ export default async function BarterDetailPage({ params }: PageProps) {
               List Barter
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-ink">{listing.detectedObject}</span>
+            <span className="text-ink">{displayName}</span>
           </nav>
 
           {listing.openForBarter && !isOwnListing && isLoggedIn && myItems.length > 0 && (

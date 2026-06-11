@@ -11,6 +11,8 @@ export function MasukPageClient() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") ?? "/admin";
   const [mode, setMode] = useState<"login" | "register">("login");
+  const [email, setEmail] = useState("admin@ecoswap.id");
+  const [password, setPassword] = useState("");
 
   const [loginState, loginFormAction, loginPending] = useActionState(loginAction, {
     error: null,
@@ -24,6 +26,16 @@ export function MasukPageClient() {
   const isPending = mode === "login" ? loginPending : registerPending;
   const state = mode === "login" ? loginState : registerState;
   const formAction = mode === "login" ? loginFormAction : registerFormAction;
+  const switchMode = (nextMode: "login" | "register") => {
+    setMode(nextMode);
+    setEmail(nextMode === "login" ? "admin@ecoswap.id" : "");
+    setPassword("");
+  };
+  const fillDemoAccount = (nextEmail: string) => {
+    setMode("login");
+    setEmail(nextEmail);
+    setPassword("password123");
+  };
 
   return (
     <PageTransition>
@@ -55,7 +67,7 @@ export function MasukPageClient() {
                 type="button"
                 role="tab"
                 aria-selected={mode === "login"}
-                onClick={() => setMode("login")}
+                onClick={() => switchMode("login")}
                 className={`flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
                   mode === "login"
                     ? "bg-forest text-ivory shadow-card"
@@ -68,7 +80,7 @@ export function MasukPageClient() {
                 type="button"
                 role="tab"
                 aria-selected={mode === "register"}
-                onClick={() => setMode("register")}
+                onClick={() => switchMode("register")}
                 className={`flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
                   mode === "register"
                     ? "bg-forest text-ivory shadow-card"
@@ -113,7 +125,8 @@ export function MasukPageClient() {
                   autoComplete="email"
                   required
                   placeholder={mode === "login" ? "admin@ecoswap.id" : "email@contoh.com"}
-                  defaultValue={mode === "login" ? "admin@ecoswap.id" : undefined}
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   className="mt-1.5 w-full rounded-xl border border-ink/20 bg-ivory/60 px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/35 focus:border-emerald focus:ring-2 focus:ring-emerald/20"
                 />
               </label>
@@ -126,7 +139,9 @@ export function MasukPageClient() {
                   autoComplete={mode === "login" ? "current-password" : "new-password"}
                   required
                   minLength={6}
-                  placeholder="••••••••"
+                  placeholder="password123"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
                   className="mt-1.5 w-full rounded-xl border border-ink/20 bg-ivory/60 px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/35 focus:border-emerald focus:ring-2 focus:ring-emerald/20"
                 />
               </label>
@@ -168,13 +183,19 @@ export function MasukPageClient() {
             {mode === "login" && (
               <div className="mt-6 rounded-xl border border-gold/20 bg-gold/5 px-4 py-3">
                 <p className="text-xs font-semibold text-ink/60">Akun Demo</p>
-                <p className="mt-1 text-xs leading-relaxed text-ink/50">
-                  <span className="font-medium text-ink">admin@ecoswap.id</span> — password:{" "}
-                  <span className="font-mono text-ink">password123</span>
-                  <br />
-                  <span className="font-medium text-ink">budi@email.com</span> — password:{" "}
-                  <span className="font-mono text-ink">password123</span>
-                </p>
+                <div className="mt-2 grid gap-2">
+                  {["admin@ecoswap.id", "budi@email.com"].map((demoEmail) => (
+                    <button
+                      key={demoEmail}
+                      type="button"
+                      onClick={() => fillDemoAccount(demoEmail)}
+                      className="flex items-center justify-between rounded-lg border border-ink/10 bg-ivory/70 px-3 py-2 text-left text-xs text-ink/60 transition-colors hover:border-emerald/30 hover:text-ink"
+                    >
+                      <span className="font-medium text-ink">{demoEmail}</span>
+                      <span className="font-mono">password123</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
