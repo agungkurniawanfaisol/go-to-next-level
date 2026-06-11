@@ -13,15 +13,35 @@ export function BarterItemPreview360({
   title,
   className = "",
 }: BarterItemPreview360Props) {
-  const imageSrc =
-    imagePath ?? "https://placehold.co/800x600/e8e2d8/1f3d32?text=EcoSwap";
+  const imageSources = [
+  "/assets/gambar_keris.png",
+  "/assets/gambar_gamelan.png",
+  "/assets/gambar_wayang.png",
+  "/assets/gambar_wayang_2.png",
+  "/assets/gambar_angklung.png",
+] as const;
 
+const imageLabels: Record<typeof imageSources[number], string> = {
+  "/assets/gambar_keris.png": "Keris",
+  "/assets/gambar_gamelan.png": "Gamelan",
+  "/assets/gambar_wayang.png": "Wayang",
+  "/assets/gambar_wayang_2.png": "Wayang Semar",
+  "/assets/gambar_angklung.png": "Angklung",
+};
+
+function getFallbackImage(id: string) {
+  const imageIndex = Math.abs(
+    Array.from(String(id)).reduce((sum, char) => sum + char.charCodeAt(0), 0),
+  ) % imageSources.length;
+
+  return imageSources[imageIndex];
+}
   return (
     <div
       className={`relative overflow-hidden rounded-xl border border-ink/8 bg-cream-muted ${className}`}
     >
       <PannellumViewer360
-        imageSrc={imageSrc}
+        imageSrc={imageSources.includes(imagePath as any) ? (imagePath as any) : getFallbackImage(title)}
         className="min-h-[200px] w-full sm:min-h-[240px]"
       />
       <span className="pointer-events-none absolute right-2 top-2 z-10 rounded-full border border-white/40 bg-forest/55 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-sm">

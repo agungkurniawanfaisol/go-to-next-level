@@ -429,7 +429,7 @@ export function BarterProposalForm({
                       Anda menawarkan
                     </p>
                     <p className="mt-2 text-lg font-semibold text-ink">
-                      {selectedItem?.detectedObject ?? "—"}
+                      {selectedItem?.detectedObject}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gold dark:text-gold-light">
                       +{selectedItem?.ecoSwapPoints.toLocaleString("id-ID") ?? 0} poin
