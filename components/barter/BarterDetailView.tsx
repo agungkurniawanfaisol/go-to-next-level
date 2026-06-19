@@ -23,9 +23,32 @@ export function BarterDetailView({
 }: BarterDetailViewProps) {
   const [viewerReady, setViewerReady] = useState(false);
 
-  const imageSrc =
-    listing.imagePath ??
-    "https://placehold.co/1200x800/e8e2d8/1f3d32?text=EcoSwap";
+  const imageSources = [
+    "/assets/gambar_keris.png",
+    "/assets/gambar_gamelan.png",
+    "/assets/gambar_wayang.png",
+    "/assets/gambar_wayang_2.png",
+    "/assets/gambar_angklung.png",
+  ] as const;
+  const imageIndex = Math.abs(
+    Array.from(String(listing.id)).reduce((sum, char) => sum + char.charCodeAt(0), 0),
+  ) % imageSources.length;
+  const imageSrc = imageSources[imageIndex];
+  const imageLabels: Record<typeof imageSources[number], string> = {
+    "/assets/gambar_keris.png": "Keris",
+    "/assets/gambar_gamelan.png": "Gamelan",
+    "/assets/gambar_wayang.png": "Wayang",
+    "/assets/gambar_wayang_2.png": "Wayang Semar",
+    "/assets/gambar_angklung.png": "Angklung",
+  };
+
+  const displayName = imageLabels[imageSrc] ?? listing.detectedObject;
+  const ceritaExcerpt = listing.swapDescription
+    ? listing.swapDescription.length > 120
+      ? listing.swapDescription.slice(0, 120) + "…"
+      : listing.swapDescription
+    : null;
+  const ceritaId = "cerita-barang";
 
   return (
     <div className="flex flex-col gap-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
@@ -80,8 +103,19 @@ export function BarterDetailView({
 
         <div className="glass-panel rounded-2xl p-6">
           <h2 className="font-display text-xl font-semibold text-ink">
-            {listing.detectedObject}
+            {displayName}
           </h2>
+          {ceritaExcerpt && (
+            <>
+              <p className="mt-2 text-sm text-ink/65">{ceritaExcerpt}</p>
+              <a
+                href={`#${ceritaId}`}
+                className="mt-3 inline-block text-sm font-semibold text-forest hover:text-emerald"
+              >
+                Baca Cerita Barang
+              </a>
+            </>
+          )}
           <div className="mt-4 space-y-2 text-sm">
             <p>
               <span className="text-ink/50">Klasifikasi: </span>
@@ -161,7 +195,7 @@ export function BarterDetailView({
         </p>
 
         {listing.swapDescription && (
-          <div className="glass-panel mt-6 rounded-2xl p-6">
+          <div id={ceritaId} className="glass-panel mt-6 rounded-2xl p-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-forest">
               Cerita Barang
             </p>

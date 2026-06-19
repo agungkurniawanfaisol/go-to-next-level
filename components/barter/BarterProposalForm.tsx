@@ -33,6 +33,44 @@ const stepLabels: Record<Step, string> = {
 
 const previewLg = "min-h-[260px] sm:min-h-[300px] lg:min-h-[380px]";
 
+const imageSources = [
+  "/assets/gambar_keris.png",
+  "/assets/gambar_gamelan.png",
+  "/assets/gambar_wayang.png",
+  "/assets/gambar_wayang_2.png",
+  "/assets/gambar_angklung.png",
+] as const;
+
+const imageLabels: Record<typeof imageSources[number], string> = {
+  "/assets/gambar_keris.png": "Keris",
+  "/assets/gambar_gamelan.png": "Gamelan",
+  "/assets/gambar_wayang.png": "Wayang",
+  "/assets/gambar_wayang_2.png": "Wayang Semar",
+  "/assets/gambar_angklung.png": "Angklung",
+};
+
+function getFallbackImage(id: string) {
+  const imageIndex = Math.abs(
+    Array.from(String(id)).reduce((sum, char) => sum + char.charCodeAt(0), 0),
+  ) % imageSources.length;
+
+  return imageSources[imageIndex];
+}
+
+function getDisplayItem(item: {
+  id: string;
+  detectedObject: string;
+  imagePath?: string | null;
+}) {
+  const imagePath = item.imagePath?.trim();
+  const isRemoteImage = imagePath?.startsWith("http");
+  const displayImage = !imagePath || isRemoteImage ? getFallbackImage(item.id) : imagePath;
+  const displayTitle =
+    imageLabels[displayImage as typeof imageSources[number]] ?? item.detectedObject;
+
+  return { imagePath: displayImage, title: displayTitle };
+}
+
 export function BarterProposalForm({
   requestedAppraisalId,
   requestedTitle,
@@ -50,6 +88,14 @@ export function BarterProposalForm({
   const [isPending, startTransition] = useTransition();
 
   const selectedItem = myItems.find((i) => i.id === offeredId);
+  const selectedDisplayItem = selectedItem ? getDisplayItem(selectedItem) : null;
+  const requestedDisplayItem = getDisplayItem({
+    id: requestedAppraisalId,
+    detectedObject: requestedTitle,
+    imagePath: requestedImagePath,
+  });
+  const requestedImg = requestedDisplayItem.imagePath;
+  const requestedDisplayName = requestedDisplayItem.title;
   const totalSteps = 4;
   const currentStepNum =
     step === "submitting" ? 4 : ["review", "select", "message", "confirm"].indexOf(step) + 1;
@@ -107,7 +153,7 @@ export function BarterProposalForm({
               {stepLabels[step]}
             </h1>
             <p className="mt-2 text-sm text-ink/55">
-              Tukar dengan <span className="font-medium text-ink">{requestedTitle}</span>
+              Tukar dengan <span className="font-medium text-ink">{requestedDisplayName}</span>
               {" · "}
               milik {requestedOwner}
             </p>
@@ -156,7 +202,7 @@ export function BarterProposalForm({
                 </p>
                 <div className="rounded-2xl border border-ink/8 bg-surface p-5 sm:p-6">
                   <p className="font-display text-xl font-semibold text-ink sm:text-2xl">
-                    {requestedTitle}
+                    {requestedDisplayName}
                   </p>
                   <p className="mt-2 text-sm text-ink/50">Milik: {requestedOwner}</p>
                   <p className="mt-3 text-lg font-semibold text-gold dark:text-gold-light">
@@ -165,8 +211,8 @@ export function BarterProposalForm({
                 </div>
               </div>
               <BarterItemPreview360
-                imagePath={requestedImagePath ?? null}
-                title={requestedTitle}
+                imagePath={requestedImg}
+                title={requestedDisplayName}
                 className={previewLg}
               />
             </motion.div>
@@ -200,10 +246,8 @@ export function BarterProposalForm({
               ) : (
                 <div className="grid gap-8 xl:grid-cols-[1fr_1.1fr] xl:gap-10">
                   <div className="space-y-3">
-                    {myItems.map((item) => {
-                      const itemImg =
-                        item.imagePath ??
-                        "https://placehold.co/400x300/e8e2d8/1f3d32?text=EcoSwap";
+                        {myItems.map((item) => {
+                          const displayItem = getDisplayItem(item);
                       return (
                         <button
                           key={item.id}
@@ -218,14 +262,14 @@ export function BarterProposalForm({
                           <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl sm:h-24 sm:w-24">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                              src={itemImg}
-                              alt={item.detectedObject}
+                              src={displayItem.imagePath}
+                              alt={displayItem.title}
                               className="h-full w-full object-cover"
                             />
                           </div>
                           <div className="min-w-0 flex-1">
                             <p className="text-base font-semibold text-ink sm:text-lg">
-                              {item.detectedObject}
+                              {displayItem.title}
                             </p>
                             <p className="mt-1 text-sm text-ink/50">
                               {item.ownerName ?? "Anda"}
@@ -246,11 +290,11 @@ export function BarterProposalForm({
                   </div>
 
                   <div className="space-y-6">
-                    {offeredId && selectedItem && (
+                    {offeredId && selectedItem && selectedDisplayItem && (
                       <>
                         <BarterItemPreview360
-                          imagePath={selectedItem.imagePath}
-                          title={selectedItem.detectedObject}
+                          imagePath={selectedDisplayItem.imagePath}
+                          title={selectedDisplayItem.title}
                           className={previewLg}
                         />
                         <BarterPointsCompare
@@ -297,7 +341,7 @@ export function BarterProposalForm({
                   </p>
                 </div>
 
-                {selectedItem && (
+                {selectedItem && selectedDisplayItem && (
                   <div className="rounded-2xl border border-gold/20 bg-gold/8 p-5 dark:border-gold/35 dark:bg-gold/12">
                     <p className="text-xs font-semibold uppercase tracking-wider text-gold">
                       Ringkasan
@@ -305,29 +349,29 @@ export function BarterProposalForm({
                     <div className="mt-4 flex items-center gap-4">
                       <div className="min-w-0 flex-1">
                         <p className="text-xs text-ink/50">Anda menawarkan:</p>
-                        <p className="font-medium text-ink">{selectedItem.detectedObject}</p>
+                        <p className="font-medium text-ink">{selectedDisplayItem.title}</p>
                       </div>
                       <svg className="h-6 w-6 shrink-0 text-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
                       <div className="min-w-0 flex-1">
                         <p className="text-xs text-ink/50">Anda meminta:</p>
-                        <p className="font-medium text-ink">{requestedTitle}</p>
+                        <p className="font-medium text-ink">{requestedDisplayName}</p>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
 
-              {selectedItem && (
+              {selectedItem && selectedDisplayItem && (
                 <div className="space-y-6">
                   <BarterPointsCompare
                     offeredPoints={selectedItem.ecoSwapPoints}
                     requestedPoints={requestedPoints}
                   />
                   <BarterItemPreview360
-                    imagePath={selectedItem.imagePath}
-                    title={selectedItem.detectedObject}
+                    imagePath={selectedDisplayItem.imagePath}
+                    title={selectedDisplayItem.title}
                     className={previewLg}
                   />
                 </div>
@@ -361,8 +405,8 @@ export function BarterProposalForm({
                     Barang lawan (360°)
                   </p>
                   <BarterItemPreview360
-                    imagePath={requestedImagePath ?? null}
-                    title={requestedTitle}
+                    imagePath={requestedImg}
+                    title={requestedDisplayName}
                     className={previewLg}
                   />
                 </div>
@@ -385,7 +429,7 @@ export function BarterProposalForm({
                       Anda menawarkan
                     </p>
                     <p className="mt-2 text-lg font-semibold text-ink">
-                      {selectedItem?.detectedObject ?? "—"}
+                      {selectedItem?.detectedObject}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gold dark:text-gold-light">
                       +{selectedItem?.ecoSwapPoints.toLocaleString("id-ID") ?? 0} poin
@@ -400,7 +444,7 @@ export function BarterProposalForm({
                     <p className="text-[10px] font-semibold uppercase tracking-wider text-ink/45">
                       Anda meminta
                     </p>
-                    <p className="mt-2 text-lg font-semibold text-ink">{requestedTitle}</p>
+                    <p className="mt-2 text-lg font-semibold text-ink">{requestedDisplayName}</p>
                     <p className="mt-1 text-sm font-medium text-gold dark:text-gold-light">
                       +{requestedPoints.toLocaleString("id-ID")} poin
                     </p>

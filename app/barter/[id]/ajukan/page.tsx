@@ -59,7 +59,7 @@ export default async function AjukanBarterPage({ params }: PageProps) {
         <HeaderWithSession />
         <main className="bg-page min-h-screen">
           <div className="mx-auto w-full max-w-3xl px-6 py-12 lg:px-8 lg:py-16">
-            <nav className="mb-8 text-sm text-ink/55" aria-label="Breadcrumb">
+            {/* <nav className="mb-8 text-sm text-ink/55" aria-label="Breadcrumb">
               <Link href="/barter" className="hover:text-forest">
                 List Barter
               </Link>
@@ -69,7 +69,7 @@ export default async function AjukanBarterPage({ params }: PageProps) {
               </Link>
               <span className="mx-2">/</span>
               <span className="text-ink">Ajukan Barter</span>
-            </nav>
+            </nav> */}
 
             <div className="rounded-2xl border border-ink/10 bg-surface p-8 text-center sm:p-12">
               <h1 className="font-display text-2xl font-semibold text-ink">
@@ -105,10 +105,7 @@ export default async function AjukanBarterPage({ params }: PageProps) {
       <HeaderWithSession />
       <main className="bg-page min-h-screen">
         <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-          <nav
-            className="mb-6 text-sm text-ink/55 sm:mb-8"
-            aria-label="Breadcrumb"
-          >
+          {/* <nav className="mb-6 text-sm text-ink/55 sm:mb-8" aria-label="Breadcrumb">
             <Link href="/barter" className="hover:text-forest">
               List Barter
             </Link>
@@ -118,7 +115,8 @@ export default async function AjukanBarterPage({ params }: PageProps) {
             </Link>
             <span className="mx-2">/</span>
             <span className="font-medium text-ink">Ajukan Barter</span>
-          </nav>
+          </nav> */}
+
 
           <BarterProposalForm
             requestedAppraisalId={listing.id}

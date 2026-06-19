@@ -93,9 +93,27 @@ export function MyDashboardClient({
         {data.myItems.length > 0 ? (
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {data.myItems.map((item) => {
-              const itemImg =
-                item.imagePath ??
-                "https://placehold.co/400x300/e8e2d8/1f3d32?text=EcoSwap";
+              const imageSources = [
+                "/assets/gambar_keris.png",
+                "/assets/gambar_gamelan.png",
+                "/assets/gambar_wayang.png",
+                "/assets/gambar_wayang_2.png",
+                "/assets/gambar_angklung.png",
+              ] as const;
+              const imageLabels: Record<typeof imageSources[number], string> = {
+                "/assets/gambar_keris.png": "Keris",
+                "/assets/gambar_gamelan.png": "Gamelan",
+                "/assets/gambar_wayang.png": "Wayang",
+                "/assets/gambar_wayang_2.png": "Wayang Semar",
+                "/assets/gambar_angklung.png": "Angklung",
+              };
+              const imageIndex = Math.abs(
+                Array.from(String(item.id)).reduce((sum, char) => sum + char.charCodeAt(0), 0),
+              ) % imageSources.length;
+              const itemImagePath = item.imagePath?.trim();
+              const isRemoteImage = itemImagePath?.startsWith("http");
+              const itemImg = !itemImagePath || isRemoteImage ? imageSources[imageIndex] : itemImagePath;
+              const displayName = imageLabels[itemImg as typeof imageSources[number]] ?? item.detectedObject;
               return (
                 <div
                   key={item.id}
@@ -114,7 +132,7 @@ export function MyDashboardClient({
                   <div className="p-4">
                     <Link href={`/barter/${item.id}`}>
                       <p className="font-display text-base font-semibold text-ink">
-                        {item.detectedObject}
+                        {displayName}
                       </p>
                       <p className="mt-1 text-xs text-ink/50">
                         {item.ownerCity ?? "—"}

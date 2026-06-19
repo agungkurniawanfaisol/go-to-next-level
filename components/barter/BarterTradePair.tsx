@@ -16,10 +16,22 @@ function ItemThumb({
   label: string;
   compact?: boolean;
 }) {
-  const imageSrc =
-    item.imagePath ??
-    "https://placehold.co/400x300/e8e2d8/1f3d32?text=EcoSwap";
-
+  const imageSources = [
+    "/assets/gambar_keris.png",
+    "/assets/gambar_gamelan.png",
+    "/assets/gambar_wayang.png",
+    "/assets/gambar_wayang_2.png",
+    "/assets/gambar_angklung.png",
+  ] as const;
+  const imageLabels: Record<typeof imageSources[number], string> = {
+    "/assets/gambar_keris.png": "Keris",
+    "/assets/gambar_gamelan.png": "Gamelan",
+    "/assets/gambar_wayang.png": "Wayang",
+    "/assets/gambar_wayang_2.png": "Wayang Semar",
+    "/assets/gambar_angklung.png": "Angklung",
+  };
+  const imageSrc = imageSources[0]; // Placeholder - replace with actual image selection logic
+  const displayName = imageLabels[imageSrc] ?? item.detectedObject;
   return (
     <div className={`min-w-0 flex-1 ${compact ? "" : ""}`}>
       <p className="text-[10px] font-semibold uppercase tracking-wider text-forest">
@@ -33,13 +45,13 @@ function ItemThumb({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imageSrc}
-            alt={item.detectedObject}
+            alt={displayName}
             className="h-full w-full object-cover"
           />
         </div>
         <div className="p-3">
           <p className="truncate text-sm font-semibold text-ink">
-            {item.detectedObject}
+            {displayName}
           </p>
           <p className="mt-0.5 truncate text-xs text-ink/50">
             {item.ownerName ?? "Anonim"}
